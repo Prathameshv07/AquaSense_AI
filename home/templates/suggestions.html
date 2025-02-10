@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Quality Improvement Suggestions</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="/static/suggests/merged.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/static/suggests/suggestion_page.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            table-layout: fixed;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .video-slider {
+            margin: 40px 0;
+        }
+        .video-slider h2 {
+            margin-bottom: 20px;
+        }
+        .video-block {
+            display: flex;
+            overflow-x: auto;
+        }
+        .video-block div {
+            flex: 0 0 auto;
+            margin: 0 10px;
+            text-align: center;
+        }
+        .video-block img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .video-title {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">AquaSense AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">				
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/manual-input/">Manual Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/iot-input/">IoT Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/suggestions/">Suggestions</a>
+                    </li>				
+                    <li class="nav-item">
+						<a class="nav-link" href="/contact/">Contact</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="container">
+    
+    <!-- Parameter Methods Table -->
+    <h2>Parameter Improvement Methods</h2>
+
+    <!-- Warning Box -->
+    <div style="background-color: #ffeb3b; color: #000; padding: 10px; border-left: 5px solid #ff9800; font-weight: bold; margin-bottom: 15px;">
+        ⚠️ Warning: We are not responsible for misuse of chemicals. Use them only under proper guidance and supervision.
+    </div>
+    
+    <table style="margin-bottom: 15px; border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Range (Case)</th>
+                <th>Ayurvedic Method</th>
+                <th>Scientific Method</th>
+                <th>Cross Verification</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Temperature -->
+            <tr>
+                <td rowspan="5">Temperature (°C)</td>
+                <td>0-10°C (Very Cold)</td>
+                <td>Avoid drinking cold water in winters, store in clay pots</td>
+                <td>Let water reach room temperature before drinking</td>
+                <td>Use a digital thermometer</td>
+            </tr>
+            <tr>
+                <td>10-20°C (Cold)</td>
+                <td>Store in copper vessels to retain minerals</td>
+                <td>Insulate pipes to avoid cooling too much</td>
+                <td>Compare with another water source</td>
+            </tr>
+            <tr>
+                <td>20-30°C (Moderate - Ideal Range)</td>
+                <td>✅ No action needed</td>
+                <td>✅ No action needed</td>
+                <td>✅ Compare water from different sources</td>
+            </tr>
+            <tr>
+                <td>30-40°C (Warm)</td>
+                <td>Add Tulsi leaves to cool naturally</td>
+                <td>Store in glass bottles instead of plastic</td>
+                <td>Use a temperature probe</td>
+            </tr>
+            <tr>
+                <td>>40°C (Very Hot)</td>
+                <td>Cool water naturally in earthen pots</td>
+                <td>Use an RO system with a cooling feature</td>
+                <td>Measure after keeping in shade</td>
+            </tr>
+
+            <!-- Dissolved Oxygen (DO) -->
+            <tr>
+                <td rowspan="5">Dissolved Oxygen (mg/L)</td>
+                <td>>10 mg/L (Very High)</td>
+                <td>✅ No action needed</td>
+                <td>✅ No action needed</td>
+                <td>Use an oxygen meter</td>
+            </tr>
+            <tr>
+                <td>6-10 mg/L (Ideal)</td>
+                <td>Store in copper vessels to maintain quality</td>
+                <td>✅ No action needed</td>
+                <td>Compare with aerated water</td>
+            </tr>
+            <tr>
+                <td>4-6 mg/L (Moderate)</td>
+                <td>Aerate by pouring water between containers</td>
+                <td>Use an air bubbler or waterfall filter</td>
+                <td>Observe fish behavior</td>
+            </tr>
+            <tr>
+                <td>2-4 mg/L (Low)</td>
+                <td>Use activated charcoal filtration</td>
+                <td>Add hydrogen peroxide (3%) in small doses</td>
+                <td>Check for unpleasant odor</td>
+            </tr>
+            <tr>
+                <td><2 mg/L (Very Low - Polluted Water)</td>
+                <td>Avoid drinking, switch to another source</td>
+                <td>Use oxygen tablets (Na₂O₂, from medical stores)</td>
+                <td>Send water for lab analysis</td>
+            </tr>
+
+            <!-- pH -->
+            <tr>
+                <td rowspan="5">pH</td>
+                <td><5.5 (Highly Acidic)</td>
+                <td>Add Tulsi or Neem leaves</td>
+                <td>Add baking soda (food-grade, safe)</td>
+                <td>Use pH strips (easily available)</td>
+            </tr>
+            <tr>
+                <td>5.5-6.5 (Slightly Acidic)</td>
+                <td>Store in copper vessels</td>
+                <td>Use calcium carbonate tablets</td>
+                <td>Compare with bottled water</td>
+            </tr>
+            <tr>
+                <td>6.5-7.5 (Neutral - Ideal)</td>
+                <td>✅ No action needed</td>
+                <td>✅ No action needed</td>
+                <td>pH meter or litmus paper</td>
+            </tr>
+            <tr>
+                <td>7.5-8.5 (Slightly Alkaline)</td>
+                <td>Add lemon drops to balance pH</td>
+                <td>Use alum (fitkari) small dose</td>
+                <td>Compare with rainwater pH</td>
+            </tr>
+            <tr>
+                <td>>8.5 (Highly Alkaline)</td>
+                <td>Use clay pot storage</td>
+                <td>Use food-grade vinegar drops</td>
+                <td>Verify with a TDS meter</td>
+            </tr>
+
+            <!-- Conductivity -->
+            <tr>
+                <td rowspan="5">Conductivity (µS/cm)</td>
+                <td><50 µS/cm (Very Low - Lacks Minerals)</td>
+                <td>Store in copper vessels</td>
+                <td>Add electrolyte tablets (ORS, medical store)</td>
+                <td>Use a TDS meter</td>
+            </tr>
+            <tr>
+                <td>50-500 µS/cm (Ideal Drinking Water)</td>
+                <td>✅ No action needed</td>
+                <td>✅ No action needed</td>
+                <td>Compare TDS with RO water</td>
+            </tr>
+            <tr>
+                <td>500-1000 µS/cm (Moderate)</td>
+                <td>Use Tulsi leaves to absorb minor contaminants</td>
+                <td>Use activated carbon filtration</td>
+                <td>Compare with tap water</td>
+            </tr>
+            <tr>
+                <td>1000-2000 µS/cm (Hard Water)</td>
+                <td>Store in earthen pots</td>
+                <td>Use RO system or ion-exchange filter</td>
+                <td>Use a digital TDS meter</td>
+            </tr>
+            <tr>
+                <td>>2000 µS/cm (Not Suitable for Drinking)</td>
+                <td>Avoid drinking directly</td>
+                <td>Use Reverse Osmosis (RO) with remineralization</td>
+                <td>Lab testing recommended</td>
+            </tr>
+
+            <!-- BOD -->
+            <tr>
+                <td rowspan="5">BOD (mg/L)</td>
+                <td><2 mg/L (Very Low - Clean Water)</td>
+                <td>✅ No action needed</td>
+                <td>✅ No action needed</td>
+                <td>Compare with natural spring water</td>
+            </tr>
+            <tr>
+                <td>2-4 mg/L (Good)</td>
+                <td>Use natural bio-filters like plants</td>
+                <td>Use UV filtration</td>
+                <td>Check for slight odor</td>
+            </tr>
+            <tr>
+                <td>4-6 mg/L (Moderate)</td>
+                <td>Use activated charcoal</td>
+                <td>Use chlorine drops (available in medical stores)</td>
+                <td>Compare with purified water</td>
+            </tr>
+            <tr>
+                <td>6-10 mg/L (High - Indicates Pollution)</td>
+                <td>Use drumstick (Moringa) seed powder</td>
+                <td>Use ozone treatment</td>
+                <td>Lab testing suggested</td>
+            </tr>
+            <tr>
+                <td>>10 mg/L (Very High - Highly Polluted)</td>
+                <td>Avoid consumption, seek alternative sources</td>
+                <td>Use advanced bio-remediation methods</td>
+                <td>Professional lab testing needed</td>
+            </tr>
+    
+            <!-- Nitrate -->
+            <tr>
+                <td rowspan="5">Nitrate (mg/L)</td>
+                <td><1 mg/L (Safe)</td>
+                <td>✅ No action needed</td>
+                <td>✅ No action needed</td>
+                <td>Use nitrate test strips</td>
+            </tr>
+            <tr>
+                <td>1-5 mg/L (Moderate)</td>
+                <td>Store in copper vessels</td>
+                <td>Use activated carbon filter</td>
+                <td>Compare with bottled water</td>
+            </tr>
+            <tr>
+                <td>5-10 mg/L (High - May Cause Health Issues)</td>
+                <td>Use drumstick seed powder</td>
+                <td>Use ion-exchange resin filters</td>
+                <td>Lab testing recommended</td>
+            </tr>
+            <tr>
+                <td>10-25 mg/L (Very High)</td>
+                <td>Avoid drinking directly</td>
+                <td>Use Reverse Osmosis (RO) system</td>
+                <td>Professional water analysis suggested</td>
+            </tr>
+            <tr>
+                <td>>25 mg/L (Extremely High - Dangerous)</td>
+                <td>Avoid drinking completely</td>
+                <td>Use a specialized nitrate removal system</td>
+                <td>Mandatory lab testing</td>
+            </tr>
+    
+            <!-- Total Coliform -->
+            <tr>
+                <td rowspan="5">Total Coliform (MPN/100mL)</td>
+                <td>0 (Safe for Drinking)</td>
+                <td>✅ No action needed</td>
+                <td>✅ No action needed</td>
+                <td>Use coliform test kits</td>
+            </tr>
+            <tr>
+                <td>1-10 (Slight Contamination)</td>
+                <td>Boil water before drinking</td>
+                <td>Use UV sterilization</td>
+                <td>Check for odor</td>
+            </tr>
+            <tr>
+                <td>10-100 (Moderate Contamination)</td>
+                <td>Use Tulsi leaves</td>
+                <td>Use chlorine tablets (available in pharmacies)</td>
+                <td>Use a coliform test kit</td>
+            </tr>
+            <tr>
+                <td>100-1000 (High Contamination)</td>
+                <td>Avoid drinking directly</td>
+                <td>Use advanced RO filtration</td>
+                <td>Lab testing mandatory</td>
+            </tr>
+            <tr>
+                <td>>1000 (Very High - Dangerous)</td>
+                <td>Do not use for drinking</td>
+                <td>Seek government-approved water treatment</td>
+                <td>Urgent professional testing needed</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <section class="multi-item-scroll-section section-padding" id="latestVideosSection">
+        <div class="section-title text-center">
+            <h2 class="text-center margin-0">Learning Center</h2>
+            <span class="text-center sub-title">1200+ videos on wide
+                range of topics</span>
+        </div>
+        <div class="container">
+            <input type="hidden" id="latestYouTubeVideosLoaded" value="true">
+            <div id="video-block-clone" class="hide">
+                <div class="owl-item">
+                    <div class="block">
+                        <a href="https://www.youtube.com/watch?v=i9c0yVuxtc0" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip">
+                            <h4 class="video-title">Video Title</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="filtered-video-blocks" class="hide"></div>
+            <div id="multi-video-scroll" class="owl-carousel owl-theme multi-item-carousel owl-loaded owl-drag"><div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-3120px, 0px, 0px); transition: 0.7s; width: 4680px;"><div class="owl-item cloned" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=dhLoqqwBiAk" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault.jpg" alt="Delhivery&amp;#39;s Road to Profitability: Can India&amp;#39;s Logistic Giant Deliver Big?-Delhivery&amp;#39;s Road to Profitability: Can India&amp;#39;s Logistic Giant Deliver Big?">
+                            <h4 class="video-title">Delhivery's Road to Profitability: Can India's Logistic Giant Deliver Big?</h4>
+                        </a>
+                    </div></div><div class="owl-item cloned" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=2_ep1H9qiyQ" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(1).jpg" alt="Today&amp;#39;s Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar-Today&amp;#39;s Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar">
+                            <h4 class="video-title">Today's Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar</h4>
+                        </a>
+                    </div></div><div class="owl-item cloned" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=6EW5ZIFK5_Y" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(2).jpg" alt="Income Tax Satsang with CA Yogesh Katariya-Income Tax Satsang with CA Yogesh Katariya">
+                            <h4 class="video-title">Income Tax Satsang with CA Yogesh Katariya</h4>
+                        </a>
+                    </div></div><div class="owl-item" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=iK7epKKPxXk" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(3).jpg" alt="Today&amp;#39;s Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar-Today&amp;#39;s Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar">
+                            <h4 class="video-title">Today's Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar</h4>
+                        </a>
+                    </div></div><div class="owl-item" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=owwnGh9Li_g" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(4).jpg" alt="How to Analyse Mutual Funds? | Parimal Ade-How to Analyse Mutual Funds? | Parimal Ade">
+                            <h4 class="video-title">How to Analyse Mutual Funds? | Parimal Ade</h4>
+                        </a>
+                    </div></div><div class="owl-item" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=2fRYdIe21mM" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(5).jpg" alt="Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade-Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade">
+                            <h4 class="video-title">Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade</h4>
+                        </a>
+                    </div></div><div class="owl-item" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=dhLoqqwBiAk" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault.jpg" alt="Delhivery&amp;#39;s Road to Profitability: Can India&amp;#39;s Logistic Giant Deliver Big?-Delhivery&amp;#39;s Road to Profitability: Can India&amp;#39;s Logistic Giant Deliver Big?">
+                            <h4 class="video-title">Delhivery's Road to Profitability: Can India's Logistic Giant Deliver Big?</h4>
+                        </a>
+                    </div></div><div class="owl-item" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=2_ep1H9qiyQ" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(1).jpg" alt="Today&amp;#39;s Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar-Today&amp;#39;s Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar">
+                            <h4 class="video-title">Today's Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar</h4>
+                        </a>
+                    </div></div><div class="owl-item active" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=6EW5ZIFK5_Y" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(2).jpg" alt="Income Tax Satsang with CA Yogesh Katariya-Income Tax Satsang with CA Yogesh Katariya">
+                            <h4 class="video-title">Income Tax Satsang with CA Yogesh Katariya</h4>
+                        </a>
+                    </div></div><div class="owl-item cloned active" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=iK7epKKPxXk" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(3).jpg" alt="Today&amp;#39;s Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar-Today&amp;#39;s Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar">
+                            <h4 class="video-title">Today's Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar</h4>
+                        </a>
+                    </div></div><div class="owl-item cloned active" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=owwnGh9Li_g" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(4).jpg" alt="How to Analyse Mutual Funds? | Parimal Ade-How to Analyse Mutual Funds? | Parimal Ade">
+                            <h4 class="video-title">How to Analyse Mutual Funds? | Parimal Ade</h4>
+                        </a>
+                    </div></div><div class="owl-item cloned" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=2fRYdIe21mM" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(5).jpg" alt="Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade-Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade">
+                            <h4 class="video-title">Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>© 2024 Water Quality Prediction | All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    $(document).ready(function(){
+        var owl = $("#multi-video-scroll").owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 3000, 
+            autoplayHoverPause: true,
+            smartSpeed: 600,  // Ensures smooth transitions
+            rewindSpeed: 800, // Helps fix blank space issues
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            },
+            navText: [
+                '<i class="fa fa-chevron-left prev-icon"></i>',
+                '<i class="fa fa-chevron-right next-icon"></i>'
+            ],
+            onInitialized: function() {
+                console.log("Carousel initialized.");
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>

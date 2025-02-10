@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Data Input</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="/static/inputs/style.css" rel="stylesheet">
+
+    <style>
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+		#cant-wait-btn {
+			margin-top: 20px;
+			padding: 10px 20px;
+			font-size: 16px;
+			color: white;
+			background-color: #373A36;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		#cant-wait-btn:hover {
+			background-color: #9D968D;
+		}
+
+		.info-box {
+			background: white;
+			padding: 10px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			max-width: 400px;
+			font-size: 14px;
+			text-align: left;
+			margin-top: 10px;
+		}
+
+		code {
+			display: block;
+			background: #f4f4f4;
+			padding: 8px;
+			border-radius: 5px;
+			font-family: monospace;
+			font-size: 13px;
+			text-align: left;
+			overflow-x: auto;
+		}
+    </style>
+
+	<script>
+		async function fetchIoTData() {
+			const baseURL = window.location.origin; // Gets "http://127.0.0.1:8000" or cloud URL
+			const url = `${baseURL}/iot-data/`;  // Django API calling FastAPI
+
+			document.getElementById('loading-screen').style.display = 'flex';
+
+			while (true) {
+				try {
+					const response = await fetch(url, {
+						method: "GET",
+						headers: { "Content-Type": "application/json" }
+					});
+
+					if (!response.ok) {
+						console.error("Failed to fetch IoT data");
+						break;
+					}
+
+					const result = await response.json();
+					if (result.status === "success") {
+						document.getElementById('temperature').value = result.data.temperature || '';
+						document.getElementById('pH').value = result.data.pH || '';
+						document.getElementById('conductivity').value = result.data.conductivity || '';
+						document.getElementById('dissolved_oxygen').value = result.data.dissolved_oxygen || '';
+						alert("IoT data received and updated!");
+						break;
+					} else if (result.status === "waiting") {
+						console.log("Waiting for IoT data...");
+					}
+				} catch (error) {
+					console.error("Error while fetching IoT data:", error.message);
+					break;
+				}
+			}
+
+			document.getElementById('loading-screen').style.display = 'none';
+		}
+
+		document.addEventListener("DOMContentLoaded", fetchIoTData);
+	</script>
+	
+</head>
+<body>
+    <div id="loading-screen" style="display: none;">
+        <div class="spinner"></div>
+        <p>Fetching data from IoT devices...</p>
+
+		<div class="info-box">
+			<p>To send IoT data, make a **POST request** to:</p>
+			<code>base_url/iot-data/</code>
+	
+			<p>With the following JSON format:</p>
+			<code>
+			{
+				"temperature": 25.5,
+				"pH": 7.0,
+				"conductivity": 500,
+				"dissolved_oxygen": 8.2
+			}
+			</code>
+	
+			<p>You can use tools like **Postman** or **Python**:</p>
+			<code>
+			import requests<br>
+			url = "base_url/iot-data/"<br>
+			data = {"temperature": 25.5, "pH": 7.0, "conductivity": 500, "dissolved_oxygen": 8.2}<br>
+			response = requests.post(url, json=data)<br>
+			print(response.json())
+			</code>
+	
+			<p>If you're unsure how to send data, you can manually enter values by clicking below button:</p>
+		</div>
+
+		<button id="cant-wait-btn">Can't Wait!!!</button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">AquaSense AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">				
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/manual-input/">Manual Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/iot-input/">IoT Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/suggestions/">Suggestions</a>
+                    </li>				
+                    <li class="nav-item">
+						<a class="nav-link" href="/contact/">Contact</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Begin Main Content -->
+
+	<div class="content">
+		<div class="container">
+
+			<div class="row">
+				<div class="maincontent col-lg-12 col-md-12 col-sm-12 col-xs-12 right">
+					<center style="margin-bottom: 50px;"><h1>Water Quality Index Calculator</h1></center>
+				</div>
+			</div>
+			
+			<!-- Start formatted calculator form -->
+			<div>
+				<h2><a name="calculator"></a>Water Quality Index Calculator</h2>
+				<p>An index value is calculated for each of four parameters: Temperature, Dissolved Oxygen, pH and Conductivity. A higher value of each index indicates better water quality. The WQI is calculated using various ML models which were trained to predict its value accurately.</p>
+				<!--/manual_input#define-->
+				<p><a href="#define">Click here to learn more about the ISQA and the five water quality parameters used to compute it.</a></p>
+				
+
+				<div class="wqcalc-form">
+				  <form name="Calculator" method="post" action="/iot-predict-wqi/">
+					{% csrf_token %}
+					  
+					  <!--- Form Header -->
+					  <div class="wqcalc-row">
+						<div class="col-far-left wqcalc-tooltip">
+						  <span class="wqcalc-header"><center>Parameter</center></span>
+						  <span class="tooltiptext">Name of the water quality indicator parameter, hover for more information.</span>
+						</div>
+						<div class="col-middle wqcalc-tooltip">
+						  <span class="wqcalc-header"><center>Data Entry</center></span>
+						  <span class="tooltiptext">Enter a value for each parameter.</span>
+						</div>
+						<div class="col-far-right wqcalc-tooltip">
+						  <span class="wqcalc-header"><center>Parameter Range</center></span>
+						  <span class="tooltiptext">Illustrated range for each parameter from good (green) to bad (red).</span>
+						</div>
+					  </div>
+
+					  <!--- Temperature Input -->
+					  <div class="wqcalc-row">
+						<div class="col-far-left wqcalc-tooltip">
+						  <label for="temp">
+							  <img alt="Temperature" class="wqcalc-form-icon" src="/static/images/Temperature.png">
+							  Temperature (°C)
+						  </label>
+						  <span class="tooltiptext">Fish and other organisms all have a preferred temperature range, and as temperature falls above or below this range, the number of individuals decreases. Water temperature is also important for its influence on water chemistry; warmer water can hold less dissolved oxygen.</span>
+						</div>
+						<div class="col-middle">
+						  <center><input type="number" name="temp" id="temperature" ,="" step="0.01" placeholder="Temperature (°C)" value="">
+						  <span class="error"></span></center>
+						</div>
+						<div class="col-far-right">
+						  <img alt="Temperature Range" class="wqcalc-range-arrow" src="/static/images/TempRange.png">
+						</div>
+					  </div>
+
+					  <!-- DO Input -->
+					  <div class="wqcalc-row">
+						<div class="col-far-left wqcalc-tooltip">
+						  <label for="DO"><img alt="DO" class="wqcalc-form-icon" src="/static/images/Dissolved Oxygen.png">DO (mg/L)</label>
+						  <span class="tooltiptext">Dissolved oxygen is a measure of oxygen available in water for fish and other organisms. Low values can kill these organisms.</span>					  			
+						</div>
+						<div class="col-middle">
+						  <center><input type="number" name="DO" id="dissolved_oxygen" ,="" step="0.01" placeholder="Dissolved Oxygen (mg/L)" value="">
+						  <span class="error"></span></center>
+						</div>
+						<div class="col-far-right">
+						  <img alt="DO Range" class="wqcalc-range-arrow" src="/static/images/DORange.png">
+						</div>
+					  </div>
+
+					  <!-- pH Input -->
+					  <div class="wqcalc-row">
+						<div class="col-far-left wqcalc-tooltip">
+						  <label for="pH"><img alt="pH" class="wqcalc-form-icon" src="/static/images/pH.png">pH</label>
+						  <span class="tooltiptext">pH is a measure of how acidic or basic the water is. Most aquatic organisms thrive in a narrow pH range of 6.5 to 8.5. Extreme pH levels can harm aquatic life and affect water chemistry, such as the solubility of nutrients and metals.</span>					  			
+						</div>
+						<div class="col-middle">
+						  <center><input type="number" name="pH" id="pH" ,="" step="0.01" placeholder="pH" value="">
+						  <span class="error"></span></center>
+						</div>
+						<div class="col-far-right">
+						  <img alt="pH Range" class="wqcalc-range-arrow" src="/static/images/pHRange.png">
+						</div>
+					  </div>
+
+					  <!-- Conductivity Input -->
+					  <div class="wqcalc-row">
+						<div class="col-far-left wqcalc-tooltip">
+						  <label for="cduc"><img alt="Conductivity" class="wqcalc-form-icon" src="/static/images/Conductivity.png">Conductivity (μS/cm)</label>
+						  <span class="tooltiptext">Conductivity is a measure of the ability of water to conduct electricity.  It is related to the amount of dissolved salt that is present in water. Water with a lot of salt can be dangerous to crops. </span>
+						</div>
+						<div class="col-middle">
+						  <center><input type="number" name="cond" id="conductivity" ,="" step="0.01" placeholder="Conductivity (μS/cm)" value="">
+						  <span class="error"></span></center>
+						</div>
+						<div class="col-far-right">
+						  <img alt="Conductivity Range" class="wqcalc-range-arrow" src="/static/images/CondRange.png">
+						</div>
+					  </div>
+
+					  <!-- WQ Input Output -->
+					  <div class="wqcalc-row">
+						<div class="col-far-left">
+						  <label for="WQI" style="margin-top: 72px">Water Quality Index:</label>
+						</div>
+						<div class="col-middle">
+							<div class="wqcalc-output" placeholder="Index Value" style="margin-top: 36px; background-color: #373A36">&nbsp;&nbsp;</div>
+						</div>
+						<div class="col-far-right">
+							<img alt="Water Quality Indicator Scale" class="wqcalc-range-arrow" src="/static/images/WQIndexScale_en.png">
+						</div>
+					  </div>
+					  
+					  <!-- Submit and reset buttons -->
+					  <div class="wqcalc-row">
+						<div class="col-left">
+							<input type="submit" value="Reset" ,="" name="RESET">
+						</div>
+						<div class="col-right">
+							<!-- <input type="submit" value="Submit" ,="" name="SUBMIT"> -->
+							<input type="submit" value="Submit" name="submit">
+						</div>
+					  </div>
+				  </form>
+				</div>
+			</div>
+			<!-- End Water Calculator Form -->
+				
+			<div>
+				<h2><a name="define"></a>Water Quality Index Calculation</h2>
+				<p>An index value is calculated for each of four parameters: Temperature, Dissolved Oxygen, pH and Conductivity. Here we describe how each of these parameters information and how their value ranges through.</p>	
+				
+				<center style="margin-bottom: 50px;"><a href="#calculator">Click here to return to the calculator.</a></center><p></p>
+				
+				<!-- Begin Index definition -->
+				<div class="row" style="text-align: left">
+					<div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<img alt="Simplified Water Quality Index" style="width: 70%; min-width: 100px; max-width: 200px; margin-bottom: 50px" src="/static/images/WQIndexScale_en.png">
+					</div>
+				<div class="description col-lg-8 col-md-8 col-sm-8 col-xs-12">
+					<h3>Water Quality Index (WQI)</h3>
+					<p>The WQI is calculated based on multiple water quality parameters, each assigned a specific weight to reflect its impact on overall water quality. Instead of using a fixed mathematical formula, we trained various machine learning models to predict WQI values based on measured input parameters. These models learn complex relationships between water quality parameters and WQI scores, improving predictive accuracy and adaptability compared to traditional calculation methods.</p>
+					<p>WQI varies from 0 to 100, with 100 indicating excellent water quality, as shown to the left.</p>
+					</div>
+				</div>
+				<!-- End index definition -->
+			
+				<!-- Begin Temperature definition -->
+				<div class="row" style="text-align: left">
+					<div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<img alt="Temperature" style="width: 70%; min-width: 100px; max-width: 200px; margin-bottom: 50px" src="/static/images/Temperature.png">
+					</div>
+					
+					<div class="description col-lg-8 col-md-8 col-sm-8 col-xs-12">
+						<h3>Temperature Sensor<a name="TEMP"></a></h3>
+						<p>Temperature is a key factor affecting aquatic life and water chemistry. Most aquatic organisms have an optimal temperature range, and deviations from this range can impact survival. Additionally, temperature influences dissolved oxygen levels—warmer water holds less oxygen.</p>
+						<p>IoT-based temperature sensors, such as DS18B20 (digital) or PT100 RTD (resistance-based), measure water temperature with high precision, typically ranging from -10°C to 85°C with an accuracy of ±0.5°C.</p>
+					</div>
+				</div>
+				<!-- End Temperature definition -->
+				
+				<!-- Begin DO definition -->
+				<div class="row" style="text-align: left">
+					<div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<img alt="Temperatre" style="width: 70%; min-width: 100px; max-width: 200px; margin-bottom: 50px" src="/static/images/Dissolved Oxygen.png">
+					</div>
+					
+					<div class="description col-lg-8 col-md-8 col-sm-8 col-xs-12">
+						<h3>Dissolved Oxygen Sensor<a name="DO"></a></h3>
+						<p>Dissolved oxygen (DO) represents the oxygen available in water for aquatic organisms. Low DO levels can cause hypoxia, leading to fish kills and ecosystem imbalance.</p>
+						<p>IoT-compatible DO sensors, such as optical DO sensors or galvanic DO probes, measure oxygen concentration in mg/L. The measurement range is typically 0 – 20 mg/L, with an accuracy of ±0.1 mg/L.</p>
+					</div>	
+				</div>
+				<!-- End DO definition -->
+				
+				<!-- Begin pH definition -->
+				<div class="row" style="text-align: left">
+					<div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<img alt="Temperature" style="width: 70%; min-width: 100px; max-width: 200px; margin-bottom: 50px" src="/static/images/pH.png">
+					</div>
+					
+					<div class="description col-lg-8 col-md-8 col-sm-8 col-xs-12">
+						<h3>pH Sensor<a name="BOD"></a></h3>
+						<p>pH measures the acidity or alkalinity of water, influencing chemical reactions and the solubility of nutrients. A balanced pH level is crucial for aquatic ecosystems and water quality.</p>
+						<p>IoT pH sensors, such as Atlas Scientific pH probes or DFRobot pH sensors, provide continuous monitoring with a measurement range of 0 – 14 pH and an accuracy of ±0.1 pH.</p>
+					</div>
+				</div>	
+				<!-- End pH definition -->
+				
+				<!-- Begin Conductivity definition -->
+				<div class="row" style="text-align: left">
+					<div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<img alt="Temperatre" style="width: 70%; min-width: 100px; max-width: 200px" src="/static/images/Conductivity.png">
+					</div>
+					
+					<div class="description col-lg-8 col-md-8 col-sm-8 col-xs-12">
+						<h3>Conductivity Sensor<a name="COND"></a></h3>
+						<p>Conductivity measures the ability of water to conduct electrical current, which depends on dissolved ions such as salts, minerals, and pollutants. High conductivity often indicates contamination.</p>
+						<p>IoT conductivity sensors, such as EC (electrical conductivity) probes or TDS (Total Dissolved Solids) meters, measure conductivity in µS/cm (microsiemens per cm). Typical ranges are 0 – 2000 µS/cm with an accuracy of ±2%.</p>
+					</div>
+				</div>	
+				<!-- End Conductivity definition -->
+				
+				<p><a href="#calculator"></a></p><center><a href="#calculator">Click here to return to the calculator.</a></center><p></p>		
+
+			</div>
+		</div>
+	</div>
+	<!-- End Main Content -->
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>© 2024 Water Quality Prediction | <a href="/manual-input/" class="text-decoration-none text-white">Switch to Manual Input</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("form[name='Calculator']").submit(function (event) {
+				event.preventDefault();  // Prevent page reload
+
+				let formData = $(this).serialize();
+				console.log("Form Data:", formData); // Debugging line
+
+				$.ajax({
+					type: "POST",
+					url: "/manual-predict-wqi/",  // Django URL mapping
+					data: formData,
+					success: function (response) {
+						console.log("Response Data:", response); // Debugging line
+						if (response.wqi) {
+							$(".wqcalc-output").html(`
+								<strong>WQI: ${response.wqi}</strong> <br> 
+								<span>Category: ${response.category}</span> <br>
+							`);
+							$(".wqcalc-output").css("background-color", response.color);
+
+							// Extract CSRF token from the existing form
+							let csrf_token = $("input[name='csrfmiddlewaretoken']").val();
+							
+							// Append the button below WQI Category
+							$(".wqcalc-output").append(`
+								<form action="/iot_predict_suggest/" method="post" style="display: inline;">
+									<input type="hidden" name="source" value="iot_input">
+
+									<!-- Add input values dynamically -->
+									<input type="hidden" name="temp" value="${$("input[name='temp']").val()}">
+									<input type="hidden" name="DO" value="${$("input[name='DO']").val()}">
+									<input type="hidden" name="pH" value="${$("input[name='pH']").val()}">
+									<input type="hidden" name="cond" value="${$("input[name='cond']").val()}">
+
+									<input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}">
+									<button type="submit" class="btn suggestion-link" 
+										data-original-color="${response.color}" style="
+										margin-top: 10px; 
+										color: black; 
+										border: 2px solid black; 
+										padding: 8px 15px; 
+										display: inline-block; 
+										text-decoration: none;
+										background-color: ${response.color};
+										transition: background-color 0.3s ease;">
+										View Improvement Suggestions
+									</button>
+								</form>
+							`);
+
+							$(document).on("mouseenter", ".suggestion-link", function () {
+								$(this).css("background-color", "#9D968D");
+							});
+							$(document).on("mouseleave", ".suggestion-link", function () {
+								$(this).css("background-color", $(this).data("original-color")); 
+							});
+						}
+					},
+					error: function (xhr, status, error) {
+						console.error("Error:", error);
+					}
+				});
+			});
+		});
+	</script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			// Show loading screen on page load
+			document.getElementById("loading-screen").style.display = "flex";
+
+			// Hide loading screen when user clicks "Can't Wait!!!"
+			document.getElementById("cant-wait-btn").addEventListener("click", function () {
+				document.getElementById("loading-screen").style.display = "none";
+			});
+
+			// Simulate IoT data fetching (you can remove this if unnecessary)
+			// setTimeout(() => {
+			// 	// If data is fetched, hide the loading screen automatically
+			// 	document.getElementById("loading-screen").style.display = "none";
+			// }, 10000); // Auto-hide after 10 seconds (optional)
+		});
+	</script>
+
+</body>
+</html>

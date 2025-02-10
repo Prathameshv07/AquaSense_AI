@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaSense AI</title>
+	<link crossorigin="anonymous" href="/static/home/bootstrap.min.css" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="/static/home/style.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- <img src="/static/images/misti_night.jpg" alt="background images"> -->
+    <section class="intro-fill">
+        <div class="fill intro-bg front-bg"></div>
+        <div class="fill intro-overlay"></div>
+        <div class="container-fluid content intro-text">
+            <h1>AquaSense AI<br><span class="preheader"><span id="a1203281a0ad">Empowering Water Quality Prediction</span></span></h1>
+        </div>
+        <div class="container" style="padding-bottom: 15%">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- intro and link for pdf and research paper -->
+    <section class="intro-text">
+		<div class="container">
+			<div class="box content nexus" ><!-- style="" -->
+				<style>
+					h3 {
+						font-weight: bold;
+					}
+					.news-item {
+						display: none;
+					}
+					.news-item-container {
+						position: relative;
+					}
+					.news-media {
+						background-color: #f0f0f0;
+					}
+					.read-more-hidden {
+						position: absolute;
+						left: -9999999px;
+						height: 0;
+					}
+					.carousel {
+						padding-top: 2em;
+						padding-bottom: 2em;
+					}
+					.selected {
+						display: block;
+					}
+					.cycle-prev, .cycle-next {
+						cursor: pointer;
+						padding: 0 15px;
+					}
+
+					.card {
+						background-color: white;
+						/*box-shadow: 2px 2px 2px rgba(0,0,0,.5);*/
+						box-shadow: 2px 2px 17px -3px rgba(0,0,0,.5);
+						/*height: 560px;*/
+						padding: 10px;
+            			margin-bottom: 20px;
+						font-size: 22px;
+						text-align: center;
+						display: flex;
+						flex-direction: column;
+						justify-content: space-between;
+					}
+					.flex, .sm-flex {
+						display: flex;
+					}
+					.flex-wrap {
+						flex-wrap: wrap;
+					}
+					.card > a > .img-responsive {
+						max-height: 192px;
+						object-fit: cover;
+						width: 100%;
+						aspect-ratio: 16 / 9;
+					}
+
+					.card p {
+						margin: 1em 0;
+					}
+
+					.card .more {
+						padding: 15px;
+						bottom: 10px;
+						background: #222;
+						border: 1px solid #666;
+						text-transform: uppercase;
+					}
+
+					@media (max-width: 768px) {
+						.sm-flex {
+							display: block;
+						}
+					}
+
+					.more a:link,
+					.more a:visited {
+						color: white;
+						font-weight: 300;
+						font-family: 'Work Sans', sans-serif;
+						text-decoration: none;
+					}
+				</style>
+				<h2 class="text-center">Technology for Smarter Water Management</h2>
+				<p>AquaSense AI operates at the intersection of Artificial Intelligence, IoT, and sustainable water management. Developed in an academic and practical research setting, the project utilizes cutting-edge technology to monitor, predict, and enhance water quality. By integrating IoT-enabled sensors and machine learning algorithms, AquaSense AI addresses real-world challenges in water resource management and supports informed decision-making for environmental sustainability.</p>
+        		<p class="text-center"><span aria-hidden="true" class="fa fa-file-pdf-o" style="color: #E10000"></span>&nbsp; <a href="">Project Blackbook</a></p>
+				<p class="text-center"><span aria-hidden="true" class="fa fa-file-pdf-o" style="color: #E10000"></span>&nbsp; <a href="">Research Paper</a></p>
+			</div>
+		</div>
+	</section>
+
+    <!-- feature of the project section -->
+    <div class="news-media" style="padding-top: 60px; padding-bottom: 60px; margin-top: 30px; ">
+        <div class="container gradient-reverse">
+        	<div class="box content nexus" style="padding: 60px 0">
+            	<h2 style="text-align: center; color: #E9E45B;">Features</h2>
+            	<div class="row flex flex-wrap">
+    
+					<!-- news -->
+					<div class="flex col-xs-6 col-sm-4">
+						<div class="card">
+							<img class="img-responsive" src="/static/images/prediction.png">
+							<p><b>Manual Prediction:</b> Input water quality parameters manually to generate predictions and classifications.</p>
+							<!-- 'Listen' instead of 'Read More' -->
+							<div class="more"><a href="/manual-input">Read More</a></div>
+						</div>
+					</div>
+					<div class="flex col-xs-6 col-sm-4">
+						<div class="card">
+							<img class="img-responsive" src="/static/images/iot.png">
+							<p><b>IoT Prediction:</b> Real-time water quality analysis powered by IoT sensors for on-site monitoring.</p>
+							<!-- 'Listen' instead of 'Read More' -->
+							<div class="more"><a href="/iot-input">Read More</a></div>
+						</div>
+					</div>
+					<div class="flex col-xs-6 col-sm-4">
+						<div class="card">
+							<img class="img-responsive" src="/static/images/suggestion.png">
+							<p><b>Suggestion Details:</b> Offers actionable recommendations based on Ayurvedic and scientific methods to improve water quality.</p>
+							<!-- 'Listen' instead of 'Read More' -->
+							<div class="more"><a href="/suggestions">Read More</a></div>
+						</div>
+					</div>
+				</div>
+        	</div>
+        </div>
+    </div>
+
+      <!-- Challenges Ahead -->
+	<section class="overview gradient content">
+		<div class="container">
+			<h2 style="color:#FF9B1A">The Challenges Ahead</h2>
+			<p class="text-center">The AquaSense AI faces many complex challenges. Among them:</p>
+			<ul class="row" style="padding: 0 !important">
+				<li class="col-xs-1" style="text-align:right;color: #FF9B1A"><span aria-hidden="true" class="fa fa-circle" style="font-size:.65em"></span><br></li>
+				<li class="col-xs-11 col-sm-5">
+					<b>Data Scarcity and Quality:</b> Limited availability of high-quality, diverse water quality datasets for training AI models.				</li>
+				<li class="col-xs-1" style="text-align:right;color: #FF9B1A"><span aria-hidden="true" class="fa fa-circle" style="font-size:.65em"></span><br></li>
+				<li class="col-xs-11 col-sm-5">
+					<b>IoT Integration:</b> Ensuring seamless communication and data flow between sensors and the prediction system.				</li>
+			</ul>
+			<ul class="row" style="padding: 0 !important">
+				<li class="col-xs-1" style="text-align:right;color: #FF9B1A"><span aria-hidden="true" class="fa fa-circle" style="font-size:.65em"></span><br></li>
+				<li class="col-xs-11 col-sm-5">
+					<b>Scalability:</b> Expanding the system to accommodate diverse geographic regions and water types.				</li>
+				<li class="col-xs-1" style="text-align:right;color: #FF9B1A"><span aria-hidden="true" class="fa fa-circle" style="font-size:.65em"></span><br></li>
+				<li class="col-xs-11 col-sm-5">
+					<b>Cost-Effectiveness:</b> Balancing the affordability of IoT devices with high-performance requirements.				</li>
+			</ul>
+			<ul class="row" style="padding: 0 !important">
+				<li class="col-xs-1" style="text-align:right;color: #FF9B1A"><span aria-hidden="true" class="fa fa-circle" style="font-size:.65em"></span><br></li>
+				<li class="col-xs-11 col-sm-5">
+					<b>User Adoption:</b> Encouraging widespread use of the system among stakeholders with varying technical expertise.				</li>
+				<li class="col-xs-1" style="text-align:right;color: #FF9B1A"><span aria-hidden="true" class="fa fa-circle" style="font-size:.65em"></span><br></li>
+				<li class="col-xs-11 col-sm-5">
+					<b>Environmental Adaptability:</b> Adapting the system to extreme weather conditions and diverse environmental settings.</li>
+			</ul>
+			<p>These challenges are interconnected and require a multidisciplinary approach to address effectively. The AquaSense AI project aims to leverage advanced technologies, collaborative efforts, and adaptive strategies to overcome these barriers, ensuring impactful and sustainable water quality management solutions.</p>
+		</div>
+	</section>
+
+    <!-- vision and mission-->
+	<section class="nexus">
+		<div class="container md-height">
+			<div class="row row-sm-height">
+				<div class="col-xs-12 col-sm-6 col-sm-height" style="padding:0 !important">
+					<div class="box content">
+						<h2>Our Vision</h2>
+						<p>To revolutionize water quality management through innovative AI and IoT technologies, fostering sustainable and healthier ecosystems globally.</p>
+						<h2>Our Mission</h2>
+						<p>To develop accessible, reliable, and intelligent water quality prediction systems that empower communities, enhance environmental sustainability, and promote informed decision-making for a better future.</p>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-sm-height nexus-image-1" style="padding:0 !important"></div>
+			</div>
+		</div>
+	</section>
+
+    <!-- Footer -->
+    <!-- <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Water Quality Prediction. All rights reserved.</p>
+    </footer> -->
+
+</body>
+</html>

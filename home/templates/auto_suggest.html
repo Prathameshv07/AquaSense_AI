@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Quality Improvement Suggestions</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="/static/suggests/merged.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/static/suggests/suggestion_page.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            table-layout: fixed;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .video-slider {
+            margin: 40px 0;
+        }
+        .video-slider h2 {
+            margin-bottom: 20px;
+        }
+        .video-block {
+            display: flex;
+            overflow-x: auto;
+        }
+        .video-block div {
+            flex: 0 0 auto;
+            margin: 0 10px;
+            text-align: center;
+        }
+        .video-block img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .video-title {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">AquaSense AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">				
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/manual-input/">Manual Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/iot-input/">IoT Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/suggestions/">Suggestions</a>
+                    </li>				
+                    <li class="nav-item">
+						<a class="nav-link" href="/contact">Contact</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+
+        <!-- Model Results Table -->
+        <h2 class="mb-4 text-center">Model Predictions</h2>
+        <table class="table table-bordered text-center" style= "margin-bottom: 80px">
+            <thead class="table-dark">
+                <tr>
+                    <th>Model Name</th>
+                    <th>Predicted WQI</th>
+                    <th>Water Quality Class</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for model, wqi in predictions.items %}
+                <tr>
+                    <td>{{ model }}</td>
+                    <td>{{ wqi.wqi|floatformat:2 }}</td>
+                    <td>{{ wqi.classification }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Parameter-Based Suggestions Table -->
+
+        <h2 class="mt-5 text-center">Water Quality Improvement Suggestions</h2>
+
+        <!-- Warning Box -->
+        <div style="background-color: #ffeb3b; color: #000; padding: 10px; border-left: 5px solid #ff9800; font-weight: bold; margin-bottom: 15px;">
+            ⚠️ Warning: We are not responsible for misuse of chemicals. Use them only under proper guidance and supervision.
+        </div>
+        <table class="table table-bordered text-center" style= "margin-bottom: 50px">
+            <thead class="table-dark">
+                <tr>
+                    <th>Parameter</th>
+                    <th>Range (Case)</th>
+                    <th>Ayurvedic Method</th>
+                    <th>Scientific Method</th>
+                    <th>Cross Verification</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if suggestions %}
+                    {% for suggestion in suggestions %}
+                    <tr>
+                        <td>{{ suggestion.parameter }}</td>
+                        <td>{{ suggestion.range }}</td>
+                        <td>{{ suggestion.ayurvedic }}</td>
+                        <td>{{ suggestion.scientific }}</td>
+                        <td>{{ suggestion.cross_verification }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr><td colspan="5">No suggestions available.</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+    <section class="multi-item-scroll-section section-padding" id="latestVideosSection">
+        <div class="section-title text-center">
+            <h2 class="text-center margin-0">Learning Center</h2>
+            <span class="text-center sub-title">1200+ videos on wide
+                range of topics</span>
+        </div>
+        <div class="container">
+            <input type="hidden" id="latestYouTubeVideosLoaded" value="true">
+            <div id="video-block-clone" class="hide">
+                <div class="owl-item">
+                    <div class="block">
+                        <a href="https://www.youtube.com/watch?v=i9c0yVuxtc0" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip">
+                            <h4 class="video-title">Video Title</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="filtered-video-blocks" class="hide"></div>
+            <div id="multi-video-scroll" class="owl-carousel owl-theme multi-item-carousel owl-loaded owl-drag"><div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-3120px, 0px, 0px); transition: 0.7s; width: 4680px;"><div class="owl-item cloned" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=dhLoqqwBiAk" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault.jpg" alt="Delhivery&amp;#39;s Road to Profitability: Can India&amp;#39;s Logistic Giant Deliver Big?-Delhivery&amp;#39;s Road to Profitability: Can India&amp;#39;s Logistic Giant Deliver Big?">
+                            <h4 class="video-title">Delhivery's Road to Profitability: Can India's Logistic Giant Deliver Big?</h4>
+                        </a>
+                    </div></div><div class="owl-item cloned" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=2_ep1H9qiyQ" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(1).jpg" alt="Today&amp;#39;s Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar-Today&amp;#39;s Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar">
+                            <h4 class="video-title">Today's Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar</h4>
+                        </a>
+                    </div></div><div class="owl-item cloned" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=6EW5ZIFK5_Y" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(2).jpg" alt="Income Tax Satsang with CA Yogesh Katariya-Income Tax Satsang with CA Yogesh Katariya">
+                            <h4 class="video-title">Income Tax Satsang with CA Yogesh Katariya</h4>
+                        </a>
+                    </div></div><div class="owl-item" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=iK7epKKPxXk" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(3).jpg" alt="Today&amp;#39;s Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar-Today&amp;#39;s Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar">
+                            <h4 class="video-title">Today's Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar</h4>
+                        </a>
+                    </div></div><div class="owl-item" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=owwnGh9Li_g" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(4).jpg" alt="How to Analyse Mutual Funds? | Parimal Ade-How to Analyse Mutual Funds? | Parimal Ade">
+                            <h4 class="video-title">How to Analyse Mutual Funds? | Parimal Ade</h4>
+                        </a>
+                    </div></div><div class="owl-item" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=2fRYdIe21mM" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(5).jpg" alt="Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade-Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade">
+                            <h4 class="video-title">Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade</h4>
+                        </a>
+                    </div></div><div class="owl-item" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=dhLoqqwBiAk" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault.jpg" alt="Delhivery&amp;#39;s Road to Profitability: Can India&amp;#39;s Logistic Giant Deliver Big?-Delhivery&amp;#39;s Road to Profitability: Can India&amp;#39;s Logistic Giant Deliver Big?">
+                            <h4 class="video-title">Delhivery's Road to Profitability: Can India's Logistic Giant Deliver Big?</h4>
+                        </a>
+                    </div></div><div class="owl-item" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=2_ep1H9qiyQ" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(1).jpg" alt="Today&amp;#39;s Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar-Today&amp;#39;s Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar">
+                            <h4 class="video-title">Today's Stock Market News - 9/1/2025 | Aaj ki Taaza Khabar</h4>
+                        </a>
+                    </div></div><div class="owl-item active" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=6EW5ZIFK5_Y" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(2).jpg" alt="Income Tax Satsang with CA Yogesh Katariya-Income Tax Satsang with CA Yogesh Katariya">
+                            <h4 class="video-title">Income Tax Satsang with CA Yogesh Katariya</h4>
+                        </a>
+                    </div></div><div class="owl-item cloned active" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=iK7epKKPxXk" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(3).jpg" alt="Today&amp;#39;s Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar-Today&amp;#39;s Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar">
+                            <h4 class="video-title">Today's Stock Market News - 8/1/2025 | Aaj ki Taaza Khabar</h4>
+                        </a>
+                    </div></div><div class="owl-item cloned active" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=owwnGh9Li_g" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(4).jpg" alt="How to Analyse Mutual Funds? | Parimal Ade-How to Analyse Mutual Funds? | Parimal Ade">
+                            <h4 class="video-title">How to Analyse Mutual Funds? | Parimal Ade</h4>
+                        </a>
+                    </div></div><div class="owl-item cloned" style="width: 390px;"><div class="block">
+                        <a href="https://www.youtube.com/watch?v=2fRYdIe21mM" target="_blank"> <span class="video-overlay"> <img src="/static/images/play-button.png" class="video-icon lozad" alt="" data-alt="video play icon">
+                        </span> <img data-src="" class="video-image lozad" data-alt="video clip" src="/static/images/hqdefault(5).jpg" alt="Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade-Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade">
+                            <h4 class="video-title">Should You Have Separate MFs for Every Goal? | Case Study by Parimal Ade</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>© 2024 Water Quality Prediction | All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    $(document).ready(function(){
+        var owl = $("#multi-video-scroll").owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 3000, 
+            autoplayHoverPause: true,
+            smartSpeed: 600,  // Ensures smooth transitions
+            rewindSpeed: 800, // Helps fix blank space issues
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            },
+            navText: [
+                '<i class="fa fa-chevron-left prev-icon"></i>',
+                '<i class="fa fa-chevron-right next-icon"></i>'
+            ],
+            onInitialized: function() {
+                console.log("Carousel initialized.");
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
