@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">AquaSense AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">				
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/manual-input/">Manual Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/iot-input/">IoT Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/suggestions/">Suggestions</a>
+                    </li>				
+                    <li class="nav-item">
+						<a class="nav-link active" href="/contact/">Contact</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="text-center"  style="margin-bottom: 20px;">Developers Info</h1>
+
+        <!-- First Person Information -->
+		<div class="row" style="text-align: left">
+			<div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<img alt="Simplified Water Quality Index" style="width: 70%; min-width: 100px; max-width: 200px; margin-bottom: 60px" src="/static/images/profile_0.png">
+			</div>
+			<div class="description col-lg-8 col-md-8 col-sm-8 col-xs-12">
+				<h3>Rishidev Mishra</h3>
+				<p>I am a dedicated and detail-oriented person with a strong foundation in statistics and data-driven decision-making. Currently pursuing a Master’s in Data Science, I have a keen interest in applying analytical techniques to solve real-world problems.</p>
+                <p>My skill set includes  SQL, Excel, and various analytical tools, allowing me to extract meaningful insights and drive informed decisions.</p>
+                <p>I am passionate about continuous learning and innovation, always striving to enhance my analytical and problem-solving capabilities. I thrive in dynamic environments that challenge me to think critically and explore data-driven solutions.</p>
+				<p style="margin-bottom: 60px">Online profile: <a href="https://www.linkedin.com/in/rishidev-mishra">LinkedIn</a></p>
+			</div>
+		</div>
+		<!-- End First Person Information -->
+			
+		<!-- Begin Second Person Information -->
+		<div class="row" style="text-align: left">
+			<div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<img alt="Temperature" style="width: 70%; min-width: 100px; max-width: 200px" src="/static/images/profile_1.png">
+			</div>
+					
+		    <div class="description col-lg-8 col-md-8 col-sm-8 col-xs-12">
+				<h3>Prathamesh Vaidya</h3>
+                <p>I am a passionate and detail-oriented Data Science & Data analytics enthusiast, currently pursuing my Master’s in Data Science. With a strong foundation in statistics, machine learning, and software development, I enjoy crafting data-driven solutions and building impactful applications.</p>
+				<p>I am always excited about learning new technologies and exploring innovative ways to leverage AI for real-world impact.</p>
+				<p style="margin-bottom: 100px">Online profile: <a href="www.linkedin.com/in/prathameshv07">LinkedIn</a></p>
+			</div>
+		</div>
+		<!-- End Second Person Information -->
+
+        <!-- Success Message -->
+        <!-- {% if success %}
+        <div class="alert alert-success text-center mt-4">
+            Thank you for reaching out! Your message has been received.
+        </div>
+        {% endif %} -->
+
+        <!-- Contact Form -->
+        <!-- <h1 class="text-center">Contact Us</h1>
+        <form method="POST" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Your Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Your Message</label>
+                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark">Send Message</button>
+        </form> -->
+
+        <!-- Success Message -->
+        {% if success %}
+        <div class="alert alert-success text-center mt-4">
+            Thank you for reaching out! Your message has been sent successfully.
+        </div>
+        {% endif %}
+
+        <!-- Contact Form -->
+        <h1 class="text-center">Contact Us</h1>
+        <form method="POST" class="mt-4">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <!-- <div class="mb-3">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="subject" class="form-control" id="subject" name="subject" placeholder="Enter your Subject" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="recipient" class="form-label">Send To</label>
+            <select class="form-control" id="recipient" name="recipient" required>
+                <option value="prathameshsvaidya77@gmail.com">Prathamesh Vaidya</option>
+                <option value="rishimishra20014@gmail.com">Rishi Mishra</option>
+            </select>
+        </div> -->
+
+        <div class="mb-3">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-dark">Send Message</button>
+        </form>
+
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>© 2024 Water Quality Prediction | All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>
