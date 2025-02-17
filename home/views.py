@@ -6,6 +6,7 @@ import json
 import time
 import os
 import pickle
+from home.utils import log_transform
 from concurrent.futures import ThreadPoolExecutor
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
