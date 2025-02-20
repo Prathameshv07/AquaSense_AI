@@ -1,0 +1,99 @@
+.multi-item-scroll-section .owl-stage .owl-item .block:hover {
+	transform: scale(1.1);
+	transition: transform .5s;
+}
+
+/*starts multi item scroll section*/
+.multi-item-scroll-section .filter-items, 
+.multi-item-scroll-section .multi-item-carousel {
+    margin-bottom: 40px;
+}
+.multi-item-scroll-section .block .video-image {
+    max-width: 340px;
+    width: 100%;
+    margin:  0 auto;
+}
+.multi-item-scroll-section .owl-stage .owl-item .block {
+    padding: 0 4%;
+    transition: 0.3s;
+}
+.multi-item-scroll-section .multi-item-carousel .owl-nav {
+    display: none;
+}
+.multi-item-scroll-section .video-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    width: 50px;
+    margin: 27% auto;
+    transition: .5s ease;
+    background-color: rgba(1, 1, 1, .7);
+    z-index: 10;
+    border-radius: 50%;
+}
+.multi-item-scroll-section .video-icon {
+    width: 20px!important;
+    height: 20px;
+    margin: 15px auto auto;
+}
+.multi-item-scroll-section .video-title {
+    color: #222;
+    padding: 15px 10px;
+    margin-bottom:0px;
+}
+
+/*ends multi item scroll section*/
+
+.multi-item-scroll-section .section-title {
+    margin-bottom: 20px;
+}
+
+@media (min-width:768px) {
+    .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {float: left;}
+	.col-sm-4 {width: 33.33333333%}
+	.col-sm-3 {width: 25%}
+	.col-sm-2 {width: 16.66666667%}
+	.multi-item-scroll-section .filter-items, .multi-item-scroll-section .multi-item-carousel {
+	    margin-bottom: 25px;
+	}
+}
+
+/* Home page css for small devices */
+@media only screen and (max-width:767px){
+	.home-slider .carousel-inner > .item .slider-intro-badge{display:none;}
+	.home-slider .carousel-inner > .item .slider-logo{margin-top:0px;}
+	.stock-o-meter-logo{max-height:30px;margin-top:0px;}
+	.home-slider .carousel-inner > .item > img.desk-slidebg{display:none;}
+	.home-slider .carousel-inner .carousel-caption{top: 0%;display: flex;display: webkit-box;display: ms-flexbox;align-items: center;flex-flow: column-reverse;position:relative;}
+	.home-slider .carousel-inner .carousel-caption .carousel-caption-block.left-area,
+	.home-slider .carousel-inner .carousel-caption .right-area{width:100%}
+	.home-slider .carousel-inner .carousel-caption .carousel-caption-block.left-area{min-height:150px;}
+	.home-slider .carousel-inner .carousel-caption .right-area{margin-right: 15%;height: 220px;}
+	.home-slider .carousel-inner .carousel-caption .right-area .mobile-slidebg{display:block;max-width:320px;margin: auto;margin-bottom: 30px;}
+	.home-slider .carousel-caption-block .block-title{line-height:32px;font-size:22px;}
+	.home-slider .carousel-caption-block .block-title .equitybanner-black{display:none;}
+	.dashboard-slider .custom-circular-orange-btn,
+	.home-slider .carousel-indicators{margin-bottom: 10px;}
+	.dashboard-slider,
+	.home-slider,
+	.home-slider .carousel-inner,
+	.home-slider .carousel-inner > .item{height:auto;background-color: #ffffff;}
+	.home-slider .carousel-indicators{left:10px;}
+	.home-slider .carousel-indicators li{width: 10px;min-height: 10px;margin:3px 0px;}
+	.dashboard-slider .carousel-control .slider-left-arrow, 
+	.dashboard-slider .carousel-control .slider-right-arrow{width:15px;}
+	.multi-item-scroll-section .custom-square-blue-btn {
+	    margin-bottom: 10px;
+	}
+}
+
+.e-learning-section, .multi-item-scroll-section {
+    padding-bottom: 60px;
+}
+
+.multi-item-scroll-section{
+	background-color: rgba(189, 189, 189, 0.05);
+}
