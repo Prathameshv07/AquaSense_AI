@@ -88,7 +88,7 @@
 						  <span class="tooltiptext">Fish and other organisms all have a preferred temperature range, and as temperature falls above or below this range, the number of individuals decreases. Water temperature is also important for its influence on water chemistry; warmer water can hold less dissolved oxygen.</span>
 						</div>
 						<div class="col-middle">
-						  	<center><input type="number" name="temp" placeholder="Temperature (°C)" value="">
+						  	<center><input type="number" name="temp" min="0" max="40" step="0.01" placeholder="Temperature (°C)" value="">
 						  <span class="error"></span></center>
 						</div>
 						<div class="col-far-right">
@@ -103,7 +103,7 @@
 						  <span class="tooltiptext">Dissolved oxygen is a measure of oxygen available in water for fish and other organisms. Low values can kill these organisms.</span>					  			
 						</div>
 						<div class="col-middle">
-						  	<center><input type="number" name="DO" placeholder="Dissolved Oxygen (mg/L)" value="">
+						  	<center><input type="number" name="DO" min="0" max="10" step="0.01" placeholder="Dissolved Oxygen (mg/L)" value="">
 						  <span class="error"></span></center>
 						</div>
 						<div class="col-far-right">
@@ -118,7 +118,7 @@
 						  <span class="tooltiptext">pH is a measure of how acidic or basic the water is. Most aquatic organisms thrive in a narrow pH range of 6.5 to 8.5. Extreme pH levels can harm aquatic life and affect water chemistry, such as the solubility of nutrients and metals.</span>					  			
 						</div>
 						<div class="col-middle">
-						  	<center><input type="number" name="pH" placeholder="pH" value="">
+						  	<center><input type="number" name="pH" min="0" max="10" step="0.01" placeholder="pH" value="">
 						  <span class="error"></span></center>
 						</div>
 						<div class="col-far-right">
@@ -133,7 +133,7 @@
 						  <span class="tooltiptext">Conductivity is a measure of the ability of water to conduct electricity.  It is related to the amount of dissolved salt that is present in water. Water with a lot of salt can be dangerous to crops. </span>
 						</div>
 						<div class="col-middle">
-						  	<center><input type="number" name="cond" placeholder="Conductivity (μS/cm)" value="">
+						  	<center><input type="number" name="cond" min="0" max="4000" step="0.01" placeholder="Conductivity (μS/cm)" value="">
 						  <span class="error"></span></center>
 						</div>
 						<div class="col-far-right">
@@ -148,7 +148,7 @@
 						  <span class="tooltiptext">Biological oxygen demand indicates how much oxygen is needed by bacteria to break down organic matter in the water. A high BOD indicates a high amount of organic pollution in water, which may be an indication of contamination by sewage or other waste.</span>
 						</div>
 						<div class="col-middle">
-						  	<center><input type="number" name="BOD" placeholder="Biological Oxygen Demand (mg/L)" value="">
+						  	<center><input type="number" name="BOD" min="0" max="12" step="0.01" placeholder="Biological Oxygen Demand (mg/L)" value="">
 						  <span class="error"></span></center>
 						</div>
 						<div class="col-far-right">
@@ -163,7 +163,7 @@
 						  <span class="tooltiptext">Nitrate is a form of nitrogen found in water, often as a result of agricultural runoff or sewage. High nitrate levels can cause algal blooms and harm aquatic life. For humans, high nitrate levels in drinking water can lead to health issues like methemoglobinemia (blue baby syndrome).</span>
 						</div>
 						<div class="col-middle">
-						  	<center><input type="number" name="Nitrate" placeholder="Nitrate (mg/L)" value="">
+						  	<center><input type="number" name="Nitrate" min="0" max="50" step="0.01" placeholder="Nitrate (mg/L)" value="">
 						  <span class="error"></span></center>
 						</div>
 						<div class="col-far-right">
@@ -178,7 +178,7 @@
 						  <span class="tooltiptext">Total coliform bacteria are a collection of microorganisms that are naturally present in the environment and are used as an indicator of water contamination and potential presence of harmful pathogens.</span>
 						</div>
 						<div class="col-middle">
-							<center><input type="number" name="TotalColiform" placeholder="Total Coliform (mg/L)"  value="">
+							<center><input type="number" name="TotalColiform" min="0" max="5000" step="0.01" placeholder="Total Coliform (mg/L)"  value="">
 						  <span class="error"></span></center>
 						</div>
 						<div class="col-far-right">
@@ -202,10 +202,10 @@
 					  <!-- Submit and reset buttons -->
 					  <div class="wqcalc-row">
 						<div class="col-left">
-							<input type="submit" value="Reset" ,="" name="RESET">
+							<input type="submit" value="Reset" onclick="resetForm()" name="RESET">
 						</div>
 						<div class="col-right">
-							<input type="submit" value="Submit" name="submit">
+							<input type="submit" value="Submit" onclick="return validateForm()" name="submit">
 						</div>
 					  </div>
 				  </form>
@@ -345,6 +345,69 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script>
+		function validateForm() {
+			let form = document.forms["Calculator"];
+			
+			let temp = form["temp"].value;
+			let DO = form["DO"].value;
+			let pH = form["pH"].value;
+			let cond = form["cond"].value;
+			let BOD = form["BOD"].value;
+			let Nitrate = form["Nitrate"].value;
+			let TotalColiform = form["TotalColiform"].value;
+			
+			// Temperature validation
+			if (temp < 0 || temp > 40) {
+				alert("Temperature must be between 0 and 40 °C.");
+				return false;
+			}
+			
+			// Dissolved Oxygen validation
+			if (DO < 0 || DO > 20) {
+				alert("Dissolved Oxygen must be between 0 and 20 mg/L.");
+				return false;
+			}
+			
+			// pH validation
+			if (pH < 0 || pH > 10) {
+				alert("pH must be between 0 and 10.");
+				return false;
+			}
+			
+			// Conductivity validation
+			if (cond < 0 || cond > 4000) {
+				alert("Conductivity must be between 0 and 4000 µS/cm.");
+				return false;
+			}
+			
+			// BOD validation
+			if (BOD < 0 || BOD > 12) {
+				alert("BOD must be between 0 and 12 mg/L.");
+				return false;
+			}
+			
+			// Nitrate validation
+			if (Nitrate < 0 || Nitrate > 50) {
+				alert("Nitrate must be between 0 and 50 mg/L.");
+				return false;
+			}
+			
+			// Total Coliform validation
+			if (TotalColiform < 0 || TotalColiform > 5000) {
+				alert("Total Coliform must be between 0 and 5000 MPN/100ml.");
+				return false;
+			}
+			
+			return true;
+		}
+
+		function resetForm() {
+			document.forms["Calculator"].reset();
+		}
+	</script>
+
 	<script>
 		$(document).ready(function () {
 			$("form[name='Calculator']").submit(function (event) {

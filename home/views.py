@@ -6,7 +6,7 @@ import json
 import time
 import os
 import pickle
-from home.utils import log_transform
+# from home.utils import log_transform
 from concurrent.futures import ThreadPoolExecutor
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
@@ -319,13 +319,24 @@ def get_suggestion(parameter, value):
             }
     return None  # Return None if no match found
 
+# Load models once, not inside the function
+model_cache = {}
+
 def load_and_predict(model_file, input_features_df):
-    """Load model and make prediction."""
-    with open(model_file, "rb") as file:
-        model = pickle.load(file)
-        wqi_value = round(model.predict(input_features_df)[0], 2)
-        # return model_file, wqi_value, classify_wqi(wqi_value)
-        return wqi_value, classify_wqi(wqi_value)
+    """Load model (if not already cached) and make prediction."""
+    if model_file not in model_cache:
+        with open(model_file, "rb") as file:
+            model_cache[model_file] = pickle.load(file)
+    
+    model = model_cache[model_file]
+    wqi_value = round(model.predict(input_features_df)[0], 2)
+    return wqi_value, classify_wqi(wqi_value)
+    
+def safe_float(value):
+    try:
+        return float(value)
+    except ValueError:
+        return None
 
 def manual_predict_suggest(request):
     """Handles input from manual_input.html and predicts WQI using multiple models."""
@@ -337,13 +348,13 @@ def manual_predict_suggest(request):
 
     # Extract input values from form
     try:
-        temperature = float(request.POST.get("temp", 0))
-        dissolved_oxygen = float(request.POST.get("DO", 0))
-        pH = float(request.POST.get("pH", 0))
-        conductivity = float(request.POST.get("cond", 0))
-        bod = float(request.POST.get("BOD", 0))
-        nitrate = float(request.POST.get("Nitrate", 0))
-        total_coliform = float(request.POST.get("TotalColiform", 0))
+        temperature = safe_float(request.POST.get("temp", 0))
+        dissolved_oxygen = safe_float(request.POST.get("DO", 0))
+        pH = safe_float(request.POST.get("pH", 0))
+        conductivity = safe_float(request.POST.get("cond", 0))
+        bod = safe_float(request.POST.get("BOD", 0))
+        nitrate = safe_float(request.POST.get("Nitrate", 0))
+        total_coliform = safe_float(request.POST.get("TotalColiform", 0))
 
         input_values = np.array([[temperature, dissolved_oxygen, pH, conductivity, bod, nitrate, total_coliform]])
         feature_columns = ["Temperature", "Dissolved Oxygen", "pH", "Conductivity", "BOD", "Nitrate", "Total Coliform"]
@@ -430,10 +441,11 @@ def iot_predict_suggest(request):
 
     # Extract input values from form
     try:
-        temperature = float(request.POST.get("temp", 0))
-        dissolved_oxygen = float(request.POST.get("DO", 0))
-        pH = float(request.POST.get("pH", 0))
-        conductivity = float(request.POST.get("cond", 0))
+
+        temperature = safe_float(request.POST.get("temp", 0))
+        dissolved_oxygen = safe_float(request.POST.get("DO", 0))
+        pH = safe_float(request.POST.get("pH", 0))
+        conductivity = safe_float(request.POST.get("cond", 0))
 
         input_values = np.array([[temperature, dissolved_oxygen, pH, conductivity]])
         feature_columns = ["Temperature", "Dissolved Oxygen", "pH", "Conductivity"]
@@ -516,12 +528,6 @@ with open(eight_gbr_model_path, "rb") as file:
 
 with open(four_gbr_model_path, "rb") as file:
     four_gbr_model = pickle.load(file)
-    
-def safe_float(value):
-    try:
-        return float(value)
-    except ValueError:
-        return None
 
 def manual_wqi_prediction(request):
     if request.method == "POST":

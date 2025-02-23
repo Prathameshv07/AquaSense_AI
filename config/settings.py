@@ -12,12 +12,35 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-
-# Enable Debugging
+from dotenv import load_dotenv
 import logging
 import firebase_admin
 from firebase_admin import credentials, db
+import json
 
+# Load environment variables
+load_dotenv()
+
+# Get Firebase credentials and database URL from environment variables
+firebase_credentials_json = os.getenv("FIREBASE_CREDENTIALS_JSON")
+firebase_database_url = os.getenv("FIREBASE_DATABASE_URL")
+
+# Initialize Firebase only if credentials and URL are present
+if firebase_credentials_json and firebase_database_url:
+    try:
+        cred_data = json.loads(firebase_credentials_json)
+        cred = credentials.Certificate(cred_data)
+
+        if not firebase_admin._apps:
+            firebase_admin.initialize_app(cred, {
+                "databaseURL": firebase_database_url
+            })
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid JSON for Firebase credentials: {e}")
+else:
+    raise ValueError("Firebase credentials or database URL is missing!")
+
+'''
 # Path to Firebase Service Account Key (Download from Firebase Console)
 FIREBASE_CREDENTIALS = os.path.join("static", "firebase", "aquasensedb.json")  # Update the path
 
@@ -27,7 +50,8 @@ if not firebase_admin._apps:
     firebase_admin.initialize_app(cred, {
         "databaseURL": "https://aquasensedb-9394e-default-rtdb.firebaseio.com/"  # Replace with your Firebase DB URL
     })
-
+'''
+    
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
