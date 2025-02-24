@@ -3,6 +3,7 @@ gunicorn
 catboost
 lightgbm
 gevent
+dotenv
 CacheControl==0.14.2
 cachetools==5.5.1
 certifi==2025.1.31
