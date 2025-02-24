@@ -608,6 +608,39 @@ def iot_wqi_prediction(request):
 
     return JsonResponse({"error": "Invalid request"}, status=400)
 
+iot_data_storage = {} 
+last_updated = 0
+
+@csrf_exempt
+def iot_data(request):
+    global iot_data_storage, last_updated
+    
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+
+            if not all(field in data for field in ["temperature", "pH", "conductivity", "dissolved_oxygen"]):
+                return JsonResponse({"status": "error", "message": "Missing required fields"}, status=400)
+
+            iot_data_storage = data
+            last_updated = time.time()
+            return JsonResponse({"status": "success", "message": "Data received"})
+
+        except json.JSONDecodeError:
+            return JsonResponse({"status": "error", "message": "Invalid JSON format"}, status=400)
+
+    elif request.method == 'GET':
+        start_time = time.time()
+        while time.time() - start_time < 600:
+            if iot_data_storage and time.time() - last_updated < 10:
+                return JsonResponse({"status": "success", "data": iot_data_storage})
+            time.sleep(1)
+
+        return JsonResponse({"status": "timeout", "message": "No data received within the timeout period"})
+
+    return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
+
+'''
 iot_data_storage = {}  # Temporary storage for IoT data (use database for persistence)
 
 @csrf_exempt
@@ -643,6 +676,7 @@ def iot_data(request):
         return JsonResponse({"status": "timeout", "message": "No data received within the timeout period"})
 
     return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
+'''
 
 def home(request):
     return render(request, 'home.html')

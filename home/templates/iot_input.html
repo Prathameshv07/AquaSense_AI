@@ -163,7 +163,10 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">AquaSense AI</a>
+            <a class="navbar-brand" href="/">
+				<img alt="favicon" src="/static/images/favicon-super-final.png" style="height: 32px; width: 32px;">
+				AquaSense AI
+			</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -410,35 +413,26 @@
 
 	<script>
 		function validateForm() {
+
 			let form = document.forms["Calculator"];
-			
-			let temp = form["temp"].value;
-			let DO = form["DO"].value;
-			let pH = form["pH"].value;
-			let cond = form["cond"].value;
-			
-			// Temperature validation
-			if (temp < 0 || temp > 40) {
-				alert("Temperature must be between 0 and 40 °C.");
-				return false;
-			}
-			
-			// Dissolved Oxygen validation
-			if (DO < 0 || DO > 20) {
-				alert("Dissolved Oxygen must be between 0 and 20 mg/L.");
-				return false;
-			}
-			
-			// pH validation
-			if (pH < 0 || pH > 10) {
-				alert("pH must be between 0 and 10.");
-				return false;
-			}
-			
-			// Conductivity validation
-			if (cond < 0 || cond > 4000) {
-				alert("Conductivity must be between 0 and 4000 µS/cm.");
-				return false;
+
+			let fields = ["temp", "DO", "pH", "cond", "BOD", "Nitrate", "TotalColiform"];
+			let fieldNames = {
+				"temp": "Temperature",
+				"DO": "Dissolved Oxygen",
+				"pH": "pH",
+				"cond": "Conductivity",
+				"BOD": "BOD",
+				"Nitrate": "Nitrate",
+				"TotalColiform": "Total Coliform"
+			};
+
+			for (let i = 0; i < fields.length; i++) {
+				let value = form[fields[i]].value;
+				if (value === "" || isNaN(value)) {
+					alert(fieldNames[fields[i]] + " must be a valid number.");
+					return false;
+				}
 			}
 			
 			return true;
