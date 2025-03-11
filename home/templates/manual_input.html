@@ -452,55 +452,5 @@
 		});
 	</script>
 
-
-	<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			$("form[name='Calculator']").submit(function (event) {
-				event.preventDefault();  // Prevent page reload
-
-				$.ajax({
-					type: "POST",
-					url: "/manual-predict-wqi/",  // Django URL mapping
-					data: $(this).serialize(),
-					success: function (response) {
-						if (response.wqi) {
-							$(".wqcalc-output").html(
-								`<strong>WQI: ${response.wqi}</strong> <br> Category: ${response.category}`
-							);
-							$(".wqcalc-output").css("background-color", response.color);
-							
-							$(".wqcalc-output").append(
-								`<p><a href="/manual_predict_suggest/" class="btn suggestion-link" 
-									style="margin-top: 10px; color: black; border: 2px solid black; padding: 8px 15px; display: inline-block; text-decoration: none;">View Improvement Suggestions</a></p>`
-							);
-
-							// Change the background color of the hyperlink
-							$(".suggestion-link").css({
-								"background-color": response.color,
-								"border": "2px solid black",
-								"transition": "background-color 0.3s ease" // Smooth hover transition
-							});
-
-							// Change color on hover
-							$(".suggestion-link").hover(
-								function () {
-									$(this).css("background-color", "#9D968D");
-								},
-								function () {
-									$(this).css("background-color", response.color);
-								}
-							);
-							
-						}
-					},
-					error: function (xhr, status, error) {
-						console.error("Error:", error);
-					}
-				});
-			});
-		});
-	</script> -->
-
 </body>
 </html>

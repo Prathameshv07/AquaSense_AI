@@ -11,23 +11,48 @@
 </head>
 <body>
 
-    <!-- <img src="/static/images/misti_night.jpg" alt="background images"> -->
-    <section class="intro-fill">
-        <div class="fill intro-bg front-bg"></div>
-        <div class="fill intro-overlay"></div>
-        <div class="container-fluid content intro-text">
-            <h1>AquaSense AI<img alt="favicon" src="/static/images/favicon-super-final.png" style="height: 6.5%; width: 6.5%;"><br>
-				<span class="preheader">
-					<span id="a1203281a0ad">Empowering Water Quality Prediction</span>
-				</span>
-			</h1>
-        </div>
-        <div class="container" style="padding-bottom: 15%">
-            <div class="row">
-                <div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"></div>
-            </div>
-        </div>
-    </section>
+
+	<!-- navigation -->
+	<section class="intro-fill">
+		<div class="fill intro-bg front-bg"></div>
+		<div class="fill intro-overlay"></div>
+		<div class="navbar navbar-inverse visible-xs">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			<span class="sr-only">toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+		</div>
+		</div>
+		<div class="unsa-nav navbar-collapse collapse">
+		<div class="unsa-nav-bg" style="position: relative">
+			<div class="container">
+				<ul class="row flx" style="flex-wrap: wrap">
+					<li><a href="/">Home</a></li>
+					<li><a href="/manual-input/">Manual Input</a></li>
+					<li><a href="/iot-input/">IoT Input</a></li>
+					<li><a href="/suggestions/">Suggestions</a></li>
+					<li><a href="/contact/">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+		</div>
+		<div class="container-fluid content intro-text">
+		<h1>AquaSense AI<img alt="favicon" src="/static/images/favicon-super-final.png" style="height: 6.5%; width: 6.5%;"><br>
+			<span class="preheader">
+			<span id="a1203281a0ad">Empowering Water Quality Prediction</span>
+			</span>
+		</h1>
+		</div>
+		<div class="container" style="padding-bottom: 15%">
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"></div>
+		</div>
+		</div>
+		</div>
+	</section>
 
     <!-- intro and link for pdf and research paper -->
     <section class="intro-text">
@@ -117,8 +142,8 @@
 				</style>
 				<h2 class="text-center">Technology for Smarter Water Management</h2>
 				<p>AquaSense AI operates at the intersection of Artificial Intelligence, IoT, and sustainable water management. Developed in an academic and practical research setting, the project utilizes cutting-edge technology to monitor, predict, and enhance water quality. By integrating IoT-enabled sensors and machine learning algorithms, AquaSense AI addresses real-world challenges in water resource management and supports informed decision-making for environmental sustainability.</p>
-        		<p class="text-center"><span aria-hidden="true" class="fa fa-file-pdf-o" style="color: #E10000"></span>&nbsp; <a href="/static/documentation/black book - our.pdf">Project Blackbook</a></p>
-				<p class="text-center"><span aria-hidden="true" class="fa fa-file-pdf-o" style="color: #E10000"></span>&nbsp; <a href="/static/documentation/Model Comparison.pdf">Research Paper (Model Comparison)</a></p>
+        		<!-- <p class="text-center"><span aria-hidden="true" class="fa fa-file-pdf-o" style="color: #E10000"></span>&nbsp; <a href="/static/documentation/black book - our.pdf">Project Documentation</a></p>
+				<p class="text-center"><span aria-hidden="true" class="fa fa-file-pdf-o" style="color: #E10000"></span>&nbsp; <a href="/static/documentation/Model Comparison.pdf">Research Paper (Model Comparison)</a></p> -->
 			</div>
 		</div>
 	</section>
@@ -136,7 +161,7 @@
 							<img class="img-responsive" src="/static/images/prediction.png">
 							<p><b>Manual Prediction:</b> Input water quality parameters manually to generate predictions and classifications.</p>
 							<!-- 'Listen' instead of 'Read More' -->
-							<div class="more"><a href="/manual-input">Read More</a></div>
+							<div class="more"><a href="/manual-input">Try Now ✨</a></div>
 						</div>
 					</div>
 					<div class="flex col-xs-6 col-sm-4">
@@ -144,7 +169,7 @@
 							<img class="img-responsive" src="/static/images/iot.png">
 							<p><b>IoT Prediction:</b> Real-time water quality analysis powered by IoT sensors for on-site monitoring.</p>
 							<!-- 'Listen' instead of 'Read More' -->
-							<div class="more"><a href="/iot-input">Read More</a></div>
+							<div class="more"><a href="/iot-input">Try Now ✨</a></div>
 						</div>
 					</div>
 					<div class="flex col-xs-6 col-sm-4">
@@ -152,7 +177,7 @@
 							<img class="img-responsive" src="/static/images/suggestion.png">
 							<p><b>Suggestion Details:</b> Offers actionable recommendations based on Ayurvedic and scientific methods to improve water quality.</p>
 							<!-- 'Listen' instead of 'Read More' -->
-							<div class="more"><a href="/suggestions">Read More</a></div>
+							<div class="more"><a href="/suggestions">Know More 🔍</a></div>
 						</div>
 					</div>
 				</div>
@@ -210,10 +235,22 @@
 		</div>
 	</section>
 
-    <!-- Footer -->
-    <!-- <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 Water Quality Prediction. All rights reserved.</p>
-    </footer> -->
+
+	<div class="bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			  		<p style="text-align: center;">&copy; 2024 Water Quality Prediction. All rights reserved.</p>
+				</div>
+		  	</div>
+		</div>
+	</div>
+
+	<script>
+		$('.navbar-toggle').click(function() {
+			$('.unsa-nav').toggle();
+		});
+	</script>
 
 </body>
 </html>

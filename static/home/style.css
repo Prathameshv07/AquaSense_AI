@@ -128,7 +128,7 @@ footer ul li {
 .bottom {
 	padding: 30px 0;
 	background-color: #cecece;
-	color: #555;
+	color: #000000;
 	text-align: left;
 	font-size: 13px;
 	line-height: 1.1em;
@@ -641,9 +641,9 @@ footer ul li {
 	z-index: 1;
 	width: 120%;
 	transform: translate(-10%, 0);
-	background: -moz-linear-gradient(bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,.15) 100%);
-	background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.35) 0%,rgba(0,0,0,.15) 100%);
-	background: linear-gradient(to top, rgba(0,0,0,0.15) 0%,rgba(0,0,0,.35) 100%);
+	background: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.325) 0%, rgba(0, 0, 0, 0.325) 100%);
+	background: -webkit-linear-gradient(bottom, rgb(0, 0, 0, 0.325) 0%,rgb(0, 0, 0, 0.325) 100%);
+	background: linear-gradient(to top, rgb(0, 0, 0, 0.325) 0%,rgb(0, 0, 0, 0.325) 100%);
 }
 
 .unsa-nav .row {

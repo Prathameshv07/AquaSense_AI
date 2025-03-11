@@ -5,21 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Me</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-	<link rel="icon" type="image/png" href="/static/images/favicon-super-final.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/static/images/favicon-super-final.png">
+    <style>
+        .dev-card {
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .dev-info h3 {
+            color: #212529;
+            border-bottom: 2px solid #353b42;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .contact-form {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .btn-contact {
+            background: #212529;
+            border: none;
+            padding: 10px 25px;
+        }
+        .btn-contact:hover {
+            background: #353b42;
+        }
+        .profile-img {
+            border-radius: 50%;
+            border: 3px solid #f8f9fa;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light">
     
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img alt="favicon" src="/static/images/favicon-super-final.png" style="height: 32px; width: 32px;">
-				AquaSense AI
-			</a>
+                AquaSense AI
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">				
+            <div class="collapse navbar-collapse" id="navbarNav">               
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
@@ -32,10 +67,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/suggestions/">Suggestions</a>
-                    </li>				
+                    </li>               
                     <li class="nav-item">
-						<a class="nav-link active" href="/contact/">Contact</a>
-					</li>
+                        <a class="nav-link active" href="/contact/">Contact</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -43,108 +78,75 @@
 
     <!-- Main Content -->
     <div class="container mt-5">
-        <h1 class="text-center"  style="margin-bottom: 20px;">Developers Info</h1>
+        <h2 class="text-center mb-4" style="color: #212529;">Meet Our Team</h2>
 
         <!-- First Person Information -->
-		<div class="row" style="text-align: left">
-			<div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12">
-				<img alt="Simplified Water Quality Index" style="width: 70%; min-width: 100px; max-width: 200px; margin-bottom: 60px" src="/static/images/profile_0.png">
-			</div>
-			<div class="description col-lg-8 col-md-8 col-sm-8 col-xs-12">
-				<h3>Rishidev Mishra</h3>
-				<p>I am a dedicated and detail-oriented person with a strong foundation in statistics and data-driven decision-making. Currently pursuing a Master’s in Data Science, I have a keen interest in applying analytical techniques to solve real-world problems.</p>
-                <p>My skill set includes  SQL, Excel, and various analytical tools, allowing me to extract meaningful insights and drive informed decisions.</p>
-                <p>I am passionate about continuous learning and innovation, always striving to enhance my analytical and problem-solving capabilities. I thrive in dynamic environments that challenge me to think critically and explore data-driven solutions.</p>
-				<p style="margin-bottom: 60px">Online profile: <a href="https://www.linkedin.com/in/rishidev-mishra">LinkedIn</a></p>
-			</div>
-		</div>
-		<!-- End First Person Information -->
-			
-		<!-- Begin Second Person Information -->
-		<div class="row" style="text-align: left">
-			<div class="logo col-lg-4 col-md-4 col-sm-4 col-xs-12">
-				<img alt="Temperature" style="width: 70%; min-width: 100px; max-width: 200px" src="/static/images/profile_1.png">
-			</div>
-					
-		    <div class="description col-lg-8 col-md-8 col-sm-8 col-xs-12">
-				<h3>Prathamesh Vaidya</h3>
-                <p>I am a passionate and detail-oriented Data Science & Data analytics enthusiast, currently pursuing my Master’s in Data Science. With a strong foundation in statistics, machine learning, and software development, I enjoy crafting data-driven solutions and building impactful applications.</p>
-				<p>I am always excited about learning new technologies and exploring innovative ways to leverage AI for real-world impact.</p>
-				<p style="margin-bottom: 100px">Online profile: <a href="https://www.linkedin.com/in/prathameshv07">LinkedIn</a></p>
-			</div>
-		</div>
-		<!-- End Second Person Information -->
-
-        <!-- Success Message -->
-        <!-- {% if success %}
-        <div class="alert alert-success text-center mt-4">
-            Thank you for reaching out! Your message has been received.
-        </div>
-        {% endif %} -->
-
-        <!-- Contact Form -->
-        <!-- <h1 class="text-center">Contact Us</h1>
-        <form method="POST" class="mt-4">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="name" class="form-label">Your Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+        <div class="dev-card">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 text-center">
+                    <img class="profile-img" alt="Profile" style="width: 80%; max-width: 180px;" src="/static/images/profile_1.png">
+                    <p class="mt-3"><a href="https://www.linkedin.com/in/prathameshv07" class="btn btn-sm btn-outline-primary"><i class="fab fa-linkedin"></i> Connect</a></p>
+                </div>
+                <div class="dev-info col-lg-9 col-md-8">
+                    <h3>Prathamesh Vaidya</h3>
+                    <p>Hello! I'm a data-driven Enthusiast with expertise in Python, JavaScript, and Machine Learning. My work spans data analytics, AI, and web development, solving real-world challenges with impactful solutions.</p>
+                    <p>I have built interactive dashboards, ML-powered applications, and business intelligence tools using frameworks like Django, and Power BI. Passionate about innovation and problem-solving, I continuously explore new technologies to create scalable and efficient applications.</p>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Your Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+            
+        <!-- Second Person Information -->
+        <div class="dev-card">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 text-center">
+                    <img class="profile-img" alt="Profile" style="width: 80%; max-width: 180px;" src="/static/images/profile_0.png">
+                    <p class="mt-3"><a href="https://www.linkedin.com/in/rishidev-mishra" class="btn btn-sm btn-outline-primary"><i class="fab fa-linkedin"></i> Connect</a></p>
+                </div>
+                <div class="dev-info col-lg-9 col-md-8">
+                    <h3>Rishidev Mishra</h3>
+                    <p>I am a dedicated and detail-oriented person with a strong foundation in statistics and data-driven decision-making. Currently pursuing a Master's in Data Science, I have a keen interest in applying analytical techniques to solve real-world problems.</p>
+                    <p>My skill set includes SQL, Excel, and various analytical tools, allowing me to extract meaningful insights and drive informed decisions.</p>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="message" class="form-label">Your Message</label>
-                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div class="row mt-5">            
+            <!-- Contact Image -->
+            <div class="col-lg-6 d-flex align-items-center justify-content-center" style="margin-top: 40px;">
+                <img src="/static/images/customer-support.png" alt="Contact Us" class="img-fluid rounded" style="max-width: 80%;">
             </div>
-            <button type="submit" class="btn btn-dark">Send Message</button>
-        </form> -->
 
-        <!-- Success Message -->
-        {% if success %}
-        <div class="alert alert-success text-center mt-4">
-            Thank you for reaching out! Your message has been sent successfully.
+            <div class="col-lg-6">
+                <h2 class="mb-4" style="color: #212529;">Contact Us</h2>
+                
+                <!-- Success Message -->
+                {% if success %}
+                <div class="alert alert-success text-center">
+                    <i class="fas fa-check-circle me-2"></i> Thank you for reaching out! Your message has been sent successfully.
+                </div>
+                {% endif %}
+                
+                <div class="contact-form">
+                    <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Your Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Your Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-contact text-white"><i class="fas fa-paper-plane me-2"></i> Send Message</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        {% endif %}
-
-        <!-- Contact Form -->
-        <h1 class="text-center">Contact Us</h1>
-        <form method="POST" class="mt-4">
-        {% csrf_token %}
-
-        <div class="mb-3">
-            <label for="name" class="form-label">Your Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="email" class="form-label">Your Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-        </div>
-
-        <!-- <div class="mb-3">
-            <label for="subject" class="form-label">Subject</label>
-            <input type="subject" class="form-control" id="subject" name="subject" placeholder="Enter your Subject" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="recipient" class="form-label">Send To</label>
-            <select class="form-control" id="recipient" name="recipient" required>
-                <option value="prathameshsvaidya77@gmail.com">Prathamesh Vaidya</option>
-                <option value="rishimishra20014@gmail.com">Rishi Mishra</option>
-            </select>
-        </div> -->
-
-        <div class="mb-3">
-            <label for="message" class="form-label">Your Message</label>
-            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-dark">Send Message</button>
-        </form>
-
-
     </div>
 
     <!-- Footer -->
@@ -153,6 +155,5 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    
 </body>
 </html>
