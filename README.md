@@ -55,11 +55,11 @@ python manage.py runserver
 4. Generate comprehensive reports
 
 ## Screenshots
-1. Manual Input
+### 1. Manual Input
 
 ![manual](https://github.com/user-attachments/assets/df31e7af-4b72-48de-92ac-9447d8b133f9)
 
-2. IoT Input
+### 2. IoT Input
 
 ![iot](https://github.com/user-attachments/assets/7fadf649-f8d2-4940-8a6f-ec680bfee360)
 
