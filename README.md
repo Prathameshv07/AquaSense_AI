@@ -1,6 +1,6 @@
 # AquaSense AI
 
-![AquaSense AI Banner](link-to-banner-image)
+![AquaSense AI Banner](https://github.com/user-attachments/assets/6f9fd12a-c29d-44e3-9384-b22361716c78)
 
 ## Overview
 AquaSense AI is an advanced water quality analysis platform built with Django that leverages 10 different machine learning models to provide accurate water quality assessments and remediation recommendations.
