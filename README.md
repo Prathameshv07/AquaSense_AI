@@ -8,12 +8,11 @@ AquaSense AI is an water quality analysis platform built with Django that levera
 ## Features
 - **Multi-parameter Analysis:** Process 7 critical water parameters (temperature, dissolved oxygen, pH, conductivity, BOD, nitrate, total coliform)
 - **IoT Integration:** Connect with sensor data for 4 key parameters in real-time
-- **Advanced Prediction System:** Primary Gradient Boosting Regression model with ensemble assessment from different ML models
+- **Advanced Prediction System:** Gradient Boosting Regression model used for accurate prediction
 - **Comprehensive Remediation Guidance:**
   - Ayurvedic treatment recommendations
   - Scientific intervention protocols
   - Cross-verification techniques
-- **User-friendly Dashboard:** Visualize water quality metrics and predictions
 - **Educational Resources:** Dedicated sections explaining water quality challenges, vision, and mission
 - **User Support:** Firebase-connected contact system for inquiries and feedback
 
