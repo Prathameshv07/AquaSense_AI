@@ -28,7 +28,7 @@ Check out the live application: [AquaSense AI](https://aquasense-ai.onrender.com
 ## Installation and Setup
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/aquasense-ai.git
+git clone https://github.com/Prathameshv07/AquaSense_AI.git
 
 # Navigate to project directory
 cd aquasense-ai
@@ -39,9 +39,6 @@ source env/bin/activate  # On Windows: env\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Set up database
-python manage.py migrate
 
 # Run the application
 python manage.py runserver
