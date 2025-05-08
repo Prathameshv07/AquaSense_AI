@@ -1,0 +1,83 @@
+@startuml AquaSense AI Architecture
+
+skinparam {
+  BackgroundColor transparent
+  ArrowColor #2C3E50
+  ComponentBorderColor #2C3E50
+  ComponentBackgroundColor #FFFFFF
+  PackageBackgroundColor #F5F9FF
+  PackageBorderColor #2C3E50
+}
+
+package "Presentation Layer" as UILayer #E6F3FF {
+  [Web Browser] as Browser
+  [Django Templates] as Templates
+  [Bootstrap UI] as Bootstrap
+  [Static Assets] as Static
+}
+
+package "Application Layer" as AppLayer #E6FFE6 {
+  [Django Views] as Views
+  [URL Routing] as URLs
+  [Form Processing] as Forms
+  [Parameter Validation] as Validation
+}
+
+package "Business Logic Layer" as BusinessLayer #FFF5E6 {
+  [Water Quality Analysis] as WQA
+  [ML Prediction Service] as MLService
+  [Remediation Recommendation] as Remediation
+  [Parameter Processing] as ParamProcess
+}
+
+package "Data Layer" as DataLayer #FFE6E6 {
+  database "SQLite Database" as DB
+  [Firebase Realtime DB] as Firebase
+  [Model Serialization] as ModelStorage
+}
+
+package "External Services" as ExtLayer #E6E6FF {
+  [IoT Sensors] as IoT
+  [Email Service] as Email
+}
+
+package "Machine Learning Layer" as MLLayer #FFEAFF {
+  [Gradient Boosting] as GB
+  [Random Forest] as RF
+  [Ensemble Models] as Ensemble
+  [Feature Processing] as Features
+}
+
+Browser --> Templates : requests
+Templates <-- Static : uses
+Templates <-- Bootstrap : styled with
+
+Templates --> Views : submits to
+Views --> URLs : routed via
+Views --> Forms : processes
+Forms --> Validation : validates
+
+Views --> WQA : calls
+Views --> Remediation : gets recommendations
+WQA --> MLService : requests predictions
+MLService --> ParamProcess : processes parameters
+
+MLService --> GB : primary model
+MLService --> RF : supporting model
+MLService --> Ensemble : ensemble methods
+GB --> Features : uses
+RF --> Features : uses
+
+WQA --> ModelStorage : loads models from
+ParamProcess --> DB : stores results
+Views --> Firebase : contact data
+
+IoT --> Views : sensor data
+Views --> Email : notifications
+
+legend right
+  Flow Types:
+  ---> Data/Request Flow
+endlegend
+
+@enduml
