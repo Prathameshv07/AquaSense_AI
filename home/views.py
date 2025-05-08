@@ -339,7 +339,7 @@ def safe_float(value):
         return None
 
 def manual_predict_suggest(request):
-    """Handles input from manual_input.html and predicts WQI using multiple models."""
+    """Handles input from manual_input.html and provides water quality suggestions."""
     
     # Check if the request is from 'manual_input.html'
     source = request.POST.get("source", "")
@@ -363,45 +363,8 @@ def manual_predict_suggest(request):
     except ValueError:
         return render(request, "auto_suggest.html", {"error": "Invalid input values"})
 
-    # Load ML models and get predictions
-    model_path = "static/model/eight parameter/"
-
-    # Mapping model filenames to full model names
-    model_name_mapping = {
-        "SVR_model.pkl": "Support Vector Regressor",
-        "CBR_model.pkl": "CatBoost Regressor",
-        "DTR_model.pkl": "Decision Tree Regressor",
-        "ENR_model.pkl": "ElasticNet Regressor",
-        "GBR_model.pkl": "Gradient Boosting Regressor",
-        "HGB_model.pkl": "Hist Gradient Boosting Regressor",
-        "LGB_model.pkl": "LightGBM Regressor",
-        "LR_model.pkl": "Linear Regression",
-        "PolyR_model.pkl": "Polynomial Regression",
-        "RFR_model.pkl": "Random Forest Regressor"
-    }
-
-    model_names = list(model_name_mapping.keys())  # Model filenames
-
+    # Define an empty dictionary for predictions
     predictions = {}
-
-    # Use threading to load models & predict in parallel
-    with ThreadPoolExecutor() as executor:
-        futures = {}
-        for model_name in model_names:
-            model_file = os.path.join(model_path, model_name)
-            if os.path.exists(model_file):
-                futures[model_name] = executor.submit(load_and_predict, model_file, input_features_df)
-
-        for model_name, future in futures.items():
-            wqi_value, classification = future.result()
-            
-            # Use full model name instead of filename
-            full_model_name = model_name_mapping.get(model_name, model_name)  # Default to filename if missing
-            
-            predictions[full_model_name] = {
-                "wqi": wqi_value,
-                "classification": classification
-            } 
 
     # Generate parameter-based suggestions
     parameter_values = {
@@ -424,7 +387,7 @@ def manual_predict_suggest(request):
 
     # Pass data to the template
     context = {
-        "predictions": predictions,  # Dictionary of WQI values & classification for all models
+        "predictions": predictions,  # Empty dictionary as we're not using multiple models
         "suggestions": suggestions,  # List of parameter-based improvement methods
         "input_values": parameter_values  # User input values
     }
@@ -432,16 +395,15 @@ def manual_predict_suggest(request):
     return render(request, "auto_suggest.html", context)
 
 def iot_predict_suggest(request):
-    """Handles input from manual_input.html and predicts WQI using multiple models."""
+    """Handles input from iot_input.html and provides water quality suggestions."""
     
-    # Check if the request is from 'manual_input.html'
+    # Check if the request is from 'iot_input.html'
     source = request.POST.get("source", "")
     if source != "iot_input":
-        return render(request, "suggestions.html")  # If not from manual_input, render suggestion.html
+        return render(request, "suggestions.html")  # If not from iot_input, render suggestion.html
 
     # Extract input values from form
     try:
-
         temperature = safe_float(request.POST.get("temp", 0))
         dissolved_oxygen = safe_float(request.POST.get("DO", 0))
         pH = safe_float(request.POST.get("pH", 0))
@@ -454,45 +416,8 @@ def iot_predict_suggest(request):
     except ValueError:
         return render(request, "auto_suggest.html", {"error": "Invalid input values"})
 
-    # Load ML models and get predictions
-    model_path = "static/model/four parameter/"
-
-    # Mapping model filenames to full model names
-    model_name_mapping = {
-        "SVR_model.pkl": "Support Vector Regressor",
-        "CBR_model.pkl": "CatBoost Regressor",
-        "DTR_model.pkl": "Decision Tree Regressor",
-        "ENR_model.pkl": "ElasticNet Regressor",
-        "GBR_model.pkl": "Gradient Boosting Regressor",
-        "HGB_model.pkl": "Hist Gradient Boosting Regressor",
-        "LGB_model.pkl": "LightGBM Regressor",
-        "LR_model.pkl": "Linear Regression",
-        "PolyR_model.pkl": "Polynomial Regression",
-        "RFR_model.pkl": "Random Forest Regressor"
-    }
-
-    model_names = list(model_name_mapping.keys())  # Model filenames
-
+    # Define an empty dictionary for predictions
     predictions = {}
-
-    # Use threading to load models & predict in parallel
-    with ThreadPoolExecutor() as executor:
-        futures = {}
-        for model_name in model_names:
-            model_file = os.path.join(model_path, model_name)
-            if os.path.exists(model_file):
-                futures[model_name] = executor.submit(load_and_predict, model_file, input_features_df)
-
-        for model_name, future in futures.items():
-            wqi_value, classification = future.result()
-            
-            # Use full model name instead of filename
-            full_model_name = model_name_mapping.get(model_name, model_name)  # Default to filename if missing
-            
-            predictions[full_model_name] = {
-                "wqi": wqi_value,
-                "classification": classification
-            } 
 
     # Generate parameter-based suggestions
     parameter_values = {
@@ -512,7 +437,7 @@ def iot_predict_suggest(request):
 
     # Pass data to the template
     context = {
-        "predictions": predictions,  # Dictionary of WQI values & classification for all models
+        "predictions": predictions,  # Empty dictionary as we're not using multiple models
         "suggestions": suggestions,  # List of parameter-based improvement methods
         "input_values": parameter_values  # User input values
     }
@@ -639,44 +564,6 @@ def iot_data(request):
         return JsonResponse({"status": "timeout", "message": "No data received within the timeout period"})
 
     return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
-
-'''
-iot_data_storage = {}  # Temporary storage for IoT data (use database for persistence)
-
-@csrf_exempt
-def iot_data(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-
-            # Validate the data
-            required_fields = ["temperature", "pH", "conductivity", "dissolved_oxygen"]
-            if not all(field in data for field in required_fields):
-                return JsonResponse({"status": "error", "message": "Missing required fields"}, status=400)
-
-            # Store the data in memory or database
-            global iot_data_storage
-            iot_data_storage = data
-            return JsonResponse({"status": "success", "message": "Data received"})
-
-        except json.JSONDecodeError:
-            return JsonResponse({"status": "error", "message": "Invalid JSON format"}, status=400)
-
-    elif request.method == 'GET':
-        # Long polling: Wait for data to be available
-        start_time = time.time()
-        while time.time() - start_time < 600:  # Wait for up to 10 minutes
-            if iot_data_storage:
-                data = iot_data_storage
-                iot_data_storage = {}  # Clear after sending
-                return JsonResponse({"status": "success", "data": data})
-            time.sleep(1)  # Sleep briefly to avoid high CPU usage
-
-        # Timeout
-        return JsonResponse({"status": "timeout", "message": "No data received within the timeout period"})
-
-    return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
-'''
 
 def home(request):
     return render(request, 'home.html')

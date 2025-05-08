@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Water Quality Prediction & Suggestions</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link href="/static/suggests/merged.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="/static/suggests/suggestion_page.css">
-	<link rel="icon" type="image/png" href="/static/images/favicon-super-final.png">
+    <link rel="icon" type="image/png" href="/static/images/favicon-super-final.png">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -22,6 +20,8 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            color: #6a6a6a;
+            background-color: #fff;
         }
         .container {
             width: 90%;
@@ -31,6 +31,9 @@
         h2 {
             text-align: center;
             margin: 20px 0;
+            color: #092a48;
+            font-size: 30px;
+            font-weight: 600;
         }
         table {
             width: 100%;
@@ -48,28 +51,105 @@
         th {
             background-color: #f4f4f4;
         }
-        .video-slider {
-            margin: 40px 0;
+        
+        /* Video slider section styles */
+        .hide {
+            display: none !important;
         }
-        .video-slider h2 {
+        .section-title {
             margin-bottom: 20px;
         }
-        .video-block {
-            display: flex;
-            overflow-x: auto;
+        .multi-item-scroll-section .video-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            width: 70px;
+            margin: auto;
+            transition: .5s ease;
+            background-color: rgba(1, 1, 1, .7);
+            z-index: 10;
+            border-radius: 15px;
         }
-        .video-block div {
-            flex: 0 0 auto;
-            margin: 0 10px;
-            text-align: center;
+        .multi-item-scroll-section .video-icon {
+            width: 20px !important;
+            height: 20px;
+            margin: 15px 25px;
         }
-        .video-block img {
+        .multi-item-scroll-section .owl-stage .owl-item .block {
+            padding: 0 4%;
+            transition: 0.3s;
+        }
+        .multi-item-scroll-section .owl-stage .owl-item .block:hover {
+            transform: scale(1.1);
+            transition: transform .5s;
+        }
+        .multi-item-scroll-section .video-title {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #222;
+            padding: 15px 10px;
+            margin-bottom: 0px;
+        }
+        
+        /* Owl Carousel Styles */
+        .owl-carousel {
+            display: none;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        .owl-carousel.owl-loaded {
+            display: block;
+        }
+        .owl-carousel .owl-stage {
+            position: relative;
+        }
+        .owl-carousel .owl-stage-outer {
+            position: relative;
+            overflow: hidden;
+        }
+        .owl-carousel .owl-item {
+            min-height: 1px;
+            float: left;
+            position: relative;
+        }
+        .owl-carousel .owl-item img {
+            display: block;
+            width: 100%;
             max-width: 100%;
             border-radius: 8px;
         }
-        .video-title {
-            margin-top: 10px;
-            font-size: 14px;
+        
+        /* Footer */
+        footer {
+            background-color: #111927;
+            color: white;
+        }
+        
+        /* Warning box */
+        .warning-box {
+            background-color: #ffeb3b; 
+            color: #000; 
+            padding: 10px; 
+            border-left: 5px solid #ff9800; 
+            font-weight: bold; 
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            .multi-item-scroll-section .video-title {
+                font-size: 12px;
+            }
         }
     </style>
 
@@ -79,7 +159,6 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            
             <a class="navbar-brand" href="/">AquaSense AI</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -109,33 +188,12 @@
     <!-- Main Content -->
     <div class="container mt-5">
 
-        <!-- Model Results Table -->
-        <h2 class="mb-4 text-center">Model Predictions</h2>
-        <table class="table table-bordered text-center" style= "margin-bottom: 80px">
-            <thead class="table-dark">
-                <tr>
-                    <th>Model Name</th>
-                    <th>Predicted WQI</th>
-                    <th>Water Quality Class</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for model, wqi in predictions.items %}
-                <tr>
-                    <td>{{ model }}</td>
-                    <td>{{ wqi.wqi|floatformat:2 }}</td>
-                    <td>{{ wqi.classification }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
         <!-- Parameter-Based Suggestions Table -->
 
         <h2 class="mt-5 text-center">Water Quality Improvement Suggestions</h2>
 
         <!-- Warning Box -->
-        <div style="background-color: #ffeb3b; color: #000; padding: 10px; border-left: 5px solid #ff9800; font-weight: bold; margin-bottom: 15px;">
+        <div class="warning-box">
             ⚠️ Warning: We are not responsible for misuse of chemicals. Use them only under proper guidance and supervision.
         </div>
         <table class="table table-bordered text-center" style= "margin-bottom: 50px">

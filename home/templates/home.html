@@ -142,9 +142,7 @@
 				</style>
 				<h2 class="text-center">Technology for Smarter Water Management</h2>
 				<p>AquaSense AI operates at the intersection of Artificial Intelligence, IoT, and sustainable water management. Developed in an academic and practical research setting, the project utilizes cutting-edge technology to monitor, predict, and enhance water quality. By integrating IoT-enabled sensors and machine learning algorithms, AquaSense AI addresses real-world challenges in water resource management and supports informed decision-making for environmental sustainability.</p>
-        		<!-- <p class="text-center"><span aria-hidden="true" class="fa fa-file-pdf-o" style="color: #E10000"></span>&nbsp; <a href="/static/documentation/black book - our.pdf">Project Documentation</a></p>
-				<p class="text-center"><span aria-hidden="true" class="fa fa-file-pdf-o" style="color: #E10000"></span>&nbsp; <a href="/static/documentation/Model Comparison.pdf">Research Paper (Model Comparison)</a></p> -->
-			</div>
+        	</div>
 		</div>
 	</section>
 
@@ -246,11 +244,20 @@
 		</div>
 	</div>
 
-	<script>
+	<!-- <script>
 		$('.navbar-toggle').click(function() {
 			$('.unsa-nav').toggle();
 		});
+	</script> -->
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			document.querySelector(".navbar-toggle").addEventListener("click", function() {
+				document.querySelector(".unsa-nav").classList.toggle("visible");
+			});
+		});
 	</script>
+
 
 </body>
 </html>
