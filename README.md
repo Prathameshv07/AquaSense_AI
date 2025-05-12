@@ -31,8 +31,10 @@ AquaSense AI is an water quality analysis platform built with Django that levera
 
 ![iot](https://github.com/user-attachments/assets/7fadf649-f8d2-4940-8a6f-ec680bfee360)
 
-## Video Preview
-Check out my application: [AquaSense AI](https://drive.google.com/file/d/1hsBX123J4670n8O-Ly-EnBvvP2Xz5e3D/view)
+## Demo & Documentation
+
+- 📄 [Project Documentation](https://drive.google.com/file/d/12yG0ZnVzYoj3hk2gMPXeR7GlgZtbmon5/view)
+- 🎥 [Video Preview](https://drive.google.com/file/d/1hsBX123J4670n8O-Ly-EnBvvP2Xz5e3D/view)
 
 ## Installation and Setup
 ```bash
