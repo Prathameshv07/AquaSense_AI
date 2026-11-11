@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using the metadata below."
+type: software
+title: "AquaSense AI: Water Quality Prediction from Manual and IoT Inputs"
+authors:
+  - given-names: "Prathamesh Sarjerao"
+    family-names: "Vaidya"
+    orcid: "https://orcid.org/0009-0000-8091-4256"
+repository-code: "https://github.com/Prathameshv07/AquaSense_AI"
+license: CC-BY-NC-4.0
+date-released: "2025-05-26"
+abstract: "A Django platform that predicts the Water Quality Index from seven manually entered parameters or four IoT sensor readings, comparing ten regression models and serving the best (Gradient Boosting) with parameter-wise remediation suggestions."
+keywords:
+  - "water quality index"
+  - "IoT"
+  - "machine learning"
+  - "gradient boosting"
+  - "regression"
+  - "Django"

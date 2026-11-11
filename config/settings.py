@@ -25,33 +25,18 @@ load_dotenv()
 firebase_credentials_json = os.getenv("FIREBASE_CREDENTIALS_JSON")
 firebase_database_url = os.getenv("FIREBASE_DATABASE_URL")
 
-# Initialize Firebase only if credentials and URL are present
+# Initialize Firebase only if credentials and URL are present.
+# Firebase is used only by the contact form, so the app still runs without it.
 if firebase_credentials_json and firebase_database_url:
     try:
-        cred_data = json.loads(firebase_credentials_json)
-        cred = credentials.Certificate(cred_data)
-
+        cred = credentials.Certificate(json.loads(firebase_credentials_json))
         if not firebase_admin._apps:
-            firebase_admin.initialize_app(cred, {
-                "databaseURL": firebase_database_url
-            })
+            firebase_admin.initialize_app(cred, {"databaseURL": firebase_database_url})
     except json.JSONDecodeError as e:
         raise ValueError(f"Invalid JSON for Firebase credentials: {e}")
 else:
-    raise ValueError("Firebase credentials or database URL is missing!")
+    logging.warning("Firebase credentials not set - the contact form will be disabled.")
 
-'''
-# Path to Firebase Service Account Key (Download from Firebase Console)
-FIREBASE_CREDENTIALS = os.path.join("static", "firebase", "aquasensedb.json")  # Update the path
-
-# Initialize Firebase only once
-if not firebase_admin._apps:
-    cred = credentials.Certificate(FIREBASE_CREDENTIALS)
-    firebase_admin.initialize_app(cred, {
-        "databaseURL": "https://aquasensedb-9394e-default-rtdb.firebaseio.com/"  # Replace with your Firebase DB URL
-    })
-'''
-    
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(levelname)s - %(message)s",
@@ -65,10 +50,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-z9c)+^!3ip(h9en3c6*s&3ufzqnzsttvqo_a%bwl*yn2jqn-@*'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-local-development-only")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -173,6 +158,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Serve files straight from static/ (no collectstatic step needed, e.g. on Vercel)
+WHITENOISE_USE_FINDERS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

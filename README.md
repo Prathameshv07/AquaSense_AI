@@ -3,12 +3,12 @@
 ![AquaSense AI Banner](https://github.com/user-attachments/assets/6f9fd12a-c29d-44e3-9384-b22361716c78)
 
 ## Overview
-AquaSense AI is an water quality analysis platform built with Django that leverages multiple machine learning models to provide accurate water quality assessments and remediation recommendations.
+AquaSense AI is a water quality analysis platform built with Django that leverages multiple machine learning models to provide accurate water quality assessments and remediation recommendations.
 
 ## Features
 - **Multi-parameter Analysis:** Process 7 critical water parameters (temperature, dissolved oxygen, pH, conductivity, BOD, nitrate, total coliform)
 - **IoT Integration:** Connect with sensor data for 4 key parameters in real-time
-- **Advanced Prediction System:** Gradient Boosting Regression model used for accurate prediction
+- **Model Comparison:** 10 regression models trained and compared for each input mode (`static/model/`); the best performer, Gradient Boosting Regression, powers the live predictions
 - **Comprehensive Remediation Guidance:**
   - Ayurvedic treatment recommendations
   - Scientific intervention protocols
@@ -21,6 +21,14 @@ AquaSense AI is an water quality analysis platform built with Django that levera
 - **ML Implementation:** scikit-learn, pickle for model serialization
 - **Frontend:** HTML, CSS, Bootstrap
 - **Cloud Services:** Firebase (for contact system)
+
+## Publication
+
+This project is the basis of the paper:
+
+> **Water Quality Predictions: Manual vs IoT Approaches**, *International Journal of Scientific Research and Engineering Development (IJSRED)*, March 2025.
+
+The reported Gradient Boosting model reached an R² score of 0.96.
 
 ## Screenshots
 ### 1. Manual Input
@@ -42,7 +50,7 @@ AquaSense AI is an water quality analysis platform built with Django that levera
 git clone https://github.com/Prathameshv07/AquaSense_AI.git
 
 # Navigate to project directory
-cd aquasense-ai
+cd AquaSense_AI
 
 # Create and activate virtual environment
 python -m venv env
@@ -51,8 +59,29 @@ source env/bin/activate  # On Windows: env\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the application
+# Configure environment variables (Firebase is optional - only the contact form needs it)
+cp .env.example .env
+
+# Run the application (http://127.0.0.1:8000)
 python manage.py runserver
+```
+
+## Project Structure
+
+```
+AquaSense_AI/
+├── config/                 # Django settings, URLs, WSGI/ASGI
+├── home/                   # Main app: views (prediction + suggestions), templates, URLs
+├── static/
+│   ├── model/
+│   │   ├── eight parameter/   # 10 trained regressors for manual input (7 parameters)
+│   │   └── four parameter/    # 10 trained regressors for IoT input (4 parameters)
+│   ├── images/, home/, inputs/, suggests/   # Images and CSS
+├── .env.example            # Environment variable template
+├── vercel.json             # Vercel deployment config
+├── requirements.txt
+├── CITATION.cff
+└── LICENSE
 ```
 
 ## Usage
@@ -67,14 +96,21 @@ python manage.py runserver
 - Enhanced visualization tools
 - Community feature for data sharing
 
-## Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+## Citation
+
+If you use or build on this project, please cite it. GitHub's **"Cite this repository"** button (generated from [`CITATION.cff`](CITATION.cff)) provides APA and BibTeX formats.
+
+```bibtex
+@software{vaidya_aquasenseai_2025,
+  author = {Vaidya, Prathamesh Sarjerao},
+  title  = {AquaSense AI: Water Quality Prediction from Manual and IoT Inputs},
+  year   = {2025},
+  url    = {https://github.com/Prathameshv07/AquaSense_AI}
+}
+```
 
 ## License
 
-[![License: CC BY-NC 4.0](https://licensebuttons.net/l/by-nc/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc/4.0/)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
-This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License**.  
-You are free to **use, share, and adapt** the material for **non-commercial and educational purposes**, as long as proper **credit is given** and any changes are noted.
-
-Learn more: [http://creativecommons.org/licenses/by-nc/4.0/](http://creativecommons.org/licenses/by-nc/4.0/)
+© 2025 Prathamesh Sarjerao Vaidya. This work is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/). You may share and adapt it for **non-commercial** purposes, provided you **give appropriate credit** and indicate any changes. See [LICENSE](LICENSE) for details.

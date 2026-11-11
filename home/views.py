@@ -6,30 +6,11 @@ import json
 import time
 import os
 import pickle
-# from home.utils import log_transform
-from concurrent.futures import ThreadPoolExecutor
+from django.conf import settings
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
 from firebase_admin import db
 import uuid  # For generating unique message IDs
-# from django.shortcuts import redirect
-# from .forms import IoTInputForm
-# from .models import IoTInput
-# from django.core.mail import send_mail
-# from joblib import Parallel, delayed
-# from django.conf import settings
-# import requests
-import firebase_admin
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import GradientBoostingRegressor
-from catboost import CatBoostRegressor
-from sklearn.ensemble import HistGradientBoostingRegressor
-from sklearn.linear_model import ElasticNet
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import PolynomialFeatures
-import lightgbm as lgb
-from sklearn.svm import SVR
 
 # Define dictionary-based suggestions for each parameter
 suggestion_rules = {
@@ -271,8 +252,6 @@ def contact(request):
         email = request.POST.get("email")
         message = request.POST.get("message")
 
-        print(name, "\n\n", email, "\n\n", message)
-
         try:
             # Get reference to Firebase database
             ref = db.reference("contact_messages")
@@ -444,9 +423,11 @@ def iot_predict_suggest(request):
 
     return render(request, "auto_suggest.html", context)
 
-eight_gbr_model_path = os.path.join("static", "model", "eight parameter", "GBR_model.pkl")
+# Gradient Boosting Regressor models (best performers in the model comparison)
+MODEL_DIR = os.path.join(settings.BASE_DIR, "static", "model")
+eight_gbr_model_path = os.path.join(MODEL_DIR, "eight parameter", "GBR_model.pkl")
 
-four_gbr_model_path = os.path.join("static", "model", "four parameter", "GBR_model.pkl")
+four_gbr_model_path = os.path.join(MODEL_DIR, "four parameter", "GBR_model.pkl")
 
 with open(eight_gbr_model_path, "rb") as file:
     eight_gbr_model = pickle.load(file)
